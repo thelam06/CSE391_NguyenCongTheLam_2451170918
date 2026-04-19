@@ -131,3 +131,14 @@ Hộp 3
 - Form không có action hay method.
 - Không có input types nào được dùng.
 ![Ảnh](screenshots/Bài_B4.3.png)
+<br>
+
+# PHẦN C - SUY LUẬN
+## Câu C1 - Kết quả được viết vào flle [product_detail.html](products_detail.html)
+
+## Câu C2 - Đoạn phản biện quan điểm của đồng nghiệp:
+- Mặc dù dùng `<div>` cho mọi thứ có vẻ tiết kiệm thời gian, nhưng nhưng nó bỏ qua những vấn đề kỹ thuật và kinh tế lâu dài.
+- Trước hết là về SEO. Máy tìm kiếm như Google sử dụng semantic HTML để phân tích cấu trúc trang. Khi bạn dùng `<header>`, `<nav>`, `<article>`, `<footer>`, Google hiểu rõ phần nào là tiêu đề, phần nào là nội dung chính. Nhưng nếu tất cả đều là `<div>`, công cụ tìm kiếm gặp khó khăn trong việc xác định nội dung chính → xếp hạng SEO tụt dốc. Một trang e-commerce dùng `<article>` cho sản phẩm sẽ xếp hạng cao hơn trang dùng `<div class="product">` trên Google.
+- Tiếp đến là về Accessibility. Người khiếm thị dùng screen reader để duyệt web. Nếu bạn dùng `<nav>` cho menu, screen reader sẽ nói "Navigation menu", giúp người dùng hiểu ngay. Nhưng nếu dùng `<div class="navigation">`, screen reader sẽ chỉ được đọc là "div", khiến trải nghiệm của người dùng trở nên tồi tệ và vi phạm WCAG. Công ty có thể bị kiện hoặc mất uy tín.
+- Ta lấy một ví dụ: Một website dùng `<header>`, `<nav>`, `<section>` sẽ có cấu trúc rõ ràng cho cả máy tìm kiếm lẫn screen reader. Còn website dùng `<div>` cho tất cả sẽ khó để máy tìm kiếm lẫn screen reader có thể hiểu đúng.
+- Tuy nhiên, `<div>` vẫn cần thiết cho layout tuỳ chỉnh, chẳng hạn `<div class="container">, <div class="grid-wrapper">`. Vậy nên giải pháp tốt nhất là dùng semantic HTML cho cấu trúc chính, và `<div>` cho layout chi tiết.
