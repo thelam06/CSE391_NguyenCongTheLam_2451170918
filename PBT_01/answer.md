@@ -90,3 +90,7 @@ Hộp 3
 5. Khó bảo trì: code phức tạp khi lồng nhiều tầng.
 6. Không responsive: không scale tốt trên mobile.
 ##### Nguồn tham chiếu: 05_tables_hyperlinks
+<br>
+
+# PHẦN B - THỰC HÀNH CODE
+## Bài B1: làm trong [profile.html](profile.html)
