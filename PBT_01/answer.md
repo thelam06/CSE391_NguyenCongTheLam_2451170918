@@ -94,3 +94,5 @@ Hộp 3
 
 # PHẦN B - THỰC HÀNH CODE
 ## Bài B1: làm trong [profile.html](profile.html)
+
+## Bài B2: làm trong [products.html](products.html)
