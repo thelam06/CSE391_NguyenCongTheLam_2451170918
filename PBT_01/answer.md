@@ -90,6 +90,7 @@ Hộp 3
 5. Khó bảo trì: code phức tạp khi lồng nhiều tầng.
 6. Không responsive: không scale tốt trên mobile.
 ##### Nguồn tham chiếu: 05_tables_hyperlinks
+
 <br>
 
 # PHẦN B - THỰC HÀNH CODE
@@ -131,6 +132,7 @@ Hộp 3
 - Form không có action hay method.
 - Không có input types nào được dùng.
 ![Ảnh](screenshots/Bài_B4.3.png)
+
 <br>
 
 # PHẦN C - SUY LUẬN
@@ -142,3 +144,9 @@ Hộp 3
 - Tiếp đến là về Accessibility. Người khiếm thị dùng screen reader để duyệt web. Nếu bạn dùng `<nav>` cho menu, screen reader sẽ nói "Navigation menu", giúp người dùng hiểu ngay. Nhưng nếu dùng `<div class="navigation">`, screen reader sẽ chỉ được đọc là "div", khiến trải nghiệm của người dùng trở nên tồi tệ và vi phạm WCAG. Công ty có thể bị kiện hoặc mất uy tín.
 - Ta lấy một ví dụ: Một website dùng `<header>`, `<nav>`, `<section>` sẽ có cấu trúc rõ ràng cho cả máy tìm kiếm lẫn screen reader. Còn website dùng `<div>` cho tất cả sẽ khó để máy tìm kiếm lẫn screen reader có thể hiểu đúng.
 - Tuy nhiên, `<div>` vẫn cần thiết cho layout tuỳ chỉnh, chẳng hạn `<div class="container">, <div class="grid-wrapper">`. Vậy nên giải pháp tốt nhất là dùng semantic HTML cho cấu trúc chính, và `<div>` cho layout chi tiết.
+
+<br>
+
+# PHẦN D - VIDEO THỰC HÀNH OBS:
+## Đề bài Video: Code-along "Trang giới thiệu sản phẩm Semantic HTML5"
+- Link video: [PBT01_NguyenCongTheLam_2451170918](https://drive.google.com/file/d/1Odlu3jYfiaOQS6I4Udqo-Q7RjnFe2ZE1/view?usp=sharing)
