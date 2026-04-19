@@ -114,3 +114,20 @@ Hộp 3
 - Lỗi 10: Dòng 12 — href="home" nên là URL hợp lệ, semantic — Sửa thành `<a href="#home">Trang chủ</a>` 
 - Lỗi 11: Dòng 13 — href="products" nên là URL hợp lệ — Sửa thành `<a href="products.html">Sản phẩm</a>`
 - Lỗi 12: Dòng 20 — src="iphone.jpg" nên có đường dẫn tương đối đầy đủ — Sửa thành `<img src="images/iphone.jpg" alt="iPhone 16 Pro">` (giả sử trong thư mục images)
+
+## Bài B4:
+### 1. Ba thẻ semantic HTML5 mà trang đó sử dụng (ghi rõ thẻ gì, ở đâu)
+- Thẻ `<header>`: Nằm ở phía trên file .html
+- Thẻ `<section>`: Nằm ở giữa file .html
+- Thẻ `<footer>`: Nằm ở phía dưới file .html
+![Ảnh](screenshots/Bài_B4.1.png)
+
+### 2. Tìm 1 `<table>` trên trang:
+- Nội dung mà `<table>` hiển thị: các thuộc tính trong HTML như border, cellspacing, style.
+- Không sử dụng thẻ `<thead>` và `<tbody>`.
+![Ảnh](screenshots/Bài_B4.2.png)
+
+### 3. Tìm 1 `<form>` trên trang:
+- Form không có action hay method.
+- Không có input types nào được dùng.
+![Ảnh](screenshots/Bài_B4.3.png)
