@@ -139,3 +139,5 @@
 - Việc so sánh hai trường dữ liệu đòi hỏi một logic "Nếu A khác B thì báo lỗi". Đây là logic điều kiện thuộc về ngôn ngữ lập trình (như JavaScript) chứ không phải ngôn ngữ đánh dấu (HTML).
 
 ## Bài B2 — Trang Multimedia: làm trong file [media.html](media.html)
+
+## Bài B3 — Form Đặt hàng hoàn chỉnh: làm trong file [checkout.html](checkout.html)
