@@ -141,3 +141,73 @@
 ## Bài B2 — Trang Multimedia: làm trong file [media.html](media.html)
 
 ## Bài B3 — Form Đặt hàng hoàn chỉnh: làm trong file [checkout.html](checkout.html)
+<br>
+
+# PHẦN C — PHÂN TÍCH & SUY LUẬN
+## Câu C1 - Debug Form
+```
+<form>
+    Tên: <input type="text">
+    
+    <input type="email" placeholder="Email của bạn">
+    
+    <input type="password" placeholder="Mật khẩu">
+    <input type="password" placeholder="Nhập lại mật khẩu">
+    
+    Phone: <input type="text" value="0901234567">
+    
+    <select>
+        <option>Hà Nội</option>
+        <option>TP.HCM</option>
+    </select>
+    
+    <label>
+        Tôi đồng ý điều khoản
+    </label>
+    
+    <input type="submit" value="Gửi">
+</form>
+```
+### Tìm và sửa tất cả 8 lỗi về validation, accessibility, và best practices:
+#### Lỗi 1: Dòng 2 — Input "Tên" không có <label for="...">, vi phạm accessibility
+- Sửa:
+```
+<label for="name">Tên:</label> 
+<input type="text" id="name" name="name" required>
+```
+
+#### Lỗi 2: Dòng 4 — Email chỉ dùng placeholder mà không có nhãn (label) thực tế, khiến người dùng bị mất ngữ cảnh khi gõ và trình đọc màn hình khó nhận diện.
+- Sửa:
+```
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" required>
+```
+
+#### Lỗi 3: Dòng 6 và 7 — Hai ô mật khẩu không có thuộc tính name, dữ liệu sẽ không được gửi về server khi submit.
+Sửa:
+```
+<input type="password" name="pass" placeholder="Mật khẩu">
+<input type="password" name="repass placeholder="Nhập lại mật khẩu">
+```
+
+#### Lỗi 4: Dòng 6 — Mật khẩu không có ràng buộc độ phức tạp (validation), gây mất an toàn tài khoản.
+Sửa: `<input type="password" placeholder="Mật khẩu" minlength="8" required>`
+
+#### Lỗi 5: Dòng 9 — Số điện thoại đang dùng type="text".
+Sửa: ```<input type="tel" value="0901234567">```
+
+#### Lỗi 6: Dòng 11 — Thẻ `<select>` thiếu thuộc tính name và nhãn (label) mô tả mục đích chọn.
+Sửa: 
+```
+<label for="city">Thành phố:</label>
+    <select id="city" name="city">
+        <option>Hà Nội</option>
+        <option>TP.HCM</option>
+    </select>
+```
+
+#### Lỗi 7: Dòng 16 — Thẻ `<label>` của checkbox không chứa input bên trong và thiếu thuộc tính required cho một điều khoản bắt buộc.
+Sửa: `<label><input type="checkbox" name="agree" required>Tôi đồng ý điều khoản</label>`
+
+#### Lỗi 8: Dòng 1 - Thẻ `<form>` thiếu thuộc tính action và method, dẫn đến việc không xác định được dữ liệu sẽ gửi đi đâu và bằng phương thức nào.
+Sửa: `<form action="#" method="POST">`
