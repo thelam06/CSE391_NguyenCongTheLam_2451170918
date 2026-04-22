@@ -101,3 +101,35 @@
 
 `<img src="Doanh_thu_Q1/2026" alt="Doanh thu quý I năm 2026">`
 ##### Nguồn tham chiếu: 06_graphics_multimedia
+
+## Câu A5 - So sánh `<figure>` với `<img>`
+```
+<!-- Cách 1 -->
+<img src="product.jpg" alt="iPhone">
+
+<!-- Cách 2 -->
+<figure>
+    <img src="product.jpg" alt="iPhone 16 Pro Max 256GB Titan">
+    <figcaption>iPhone 16 Pro Max — 25.990.000đ</figcaption>
+</figure>
+```
+### Dùng Cách 1 khi:
+- Hình ảnh chỉ mang tính chất trang trí hoặc là một phần của danh sách sản phẩm lớn.
+- Cần tối giản code và tự kiểm soát bố cục bằng CSS.
+#### Ví dụ:
+`<img src="Apple_logo.jpg" alt="Đây là thương hiệu của điện thoại Apple">`
+
+### Dùng Cách 2 khi:
+- Hình ảnh là một nội dung độc lập (ảnh minh họa trong bài viết, bài đánh giá sản phẩm, ...).
+- Nhóm hình ảnh và chú thích thành một khối thống nhất về mặt ý nghĩa.
+- Cần tối ưu SEO: Trình đọc màn hình đánh giá cao việc hình ảnh có chú thích rõ ràng bằng `<figcaption>`.
+#### Ví dụ:
+```
+<figure>
+    <img src="iPhone_Image.jpg" alt="iPhone 16 Pro Max 256GB Titan">
+    <figcaption>iPhone 16 Pro Max màu Titan — Giá 25.990.000đ</figcaption>
+</figure>
+```
+<br>
+
+# PHẦN B — THỰC HÀNH CODE
