@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Đặt hàng hoàn chỉnh</title>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>iPhone 16</td>
+                <td>999 USD</td>
+                <td>2</td>
+                <td>1998 USD</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>iPhone 16 Plus</td>
+                <td>1099 USD</td>
+                <td>1</td>
+                <td>1099 USD</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>iPhone 16 Pro</td>
+                <td>1199 USD</td>
+                <td>1</td>
+                <td>1199 USD</td>
+            </tr>
+        <tfoot>
+            <tr>
+                <td colspan="4">Tổng cộng:</td>
+                <td><output>4296 USD</output></td>
+            </tr>
+        </tfoot>
+        </tbody>
+    </table>
+
+    <p>
+        <label for="search">Tìm sản phẩm tặng kèm:</label><br>
+        <input type="text" id="search" list="products_list" placeholder="Gõ để tìm...">
+        <datalist id="products_list">
+            <option value="Ốp lưng Silicon">
+            <option value="Cáp sạc USB-C">
+            <option value="Dán màn hình">
+        </datalist>
+    </p>
+
+    <form action="#" method="POST">
+        <fieldset>
+            <legend>Thanh toán</legend>
+            <label>Phương thức thanh toán:</label>
+            <input type="radio" id="COD" name="COD" checked>COD
+            <input type="radio" id="bank" name="bank">Chuyển khoản
+            <input type="radio" id="wallet" name="wallet">Ví điện tử
+            <br>
+
+            <label for="coupon">Mã giảm giá:</label>
+            <input type="text" id="coupon" name="coupon" pattern="^SALE\d{4}$" placeholder="Nhập mã giảm giá">
+            <br>
+            <p>
+                Điểm tích luỹ:
+                <meter min="0" max="100" value="50">50%</meter>
+            </p>
+            <textarea placeholder="Ghi chú"></textarea>
+        </fieldset>
+    </form>
+
+    <fieldset>
+        <legend>Thông tin giao hàng</legend>
+        <label for="date">Ngày giao hàng:</label>
+        <input type="date" id="date" name="date" min="2026-23-04">
+        <select>
+            <option value="Morning">Sáng 8-12h</option>
+            <option value="Afternoon">Chiều 14-18h</option>
+            <option value="Evening">Tối 18-21h</option>
+        </select>
+        <label for="time">Thời gian giao hàng:</label>
+        <input type="range" min="1" max="7" step="1">
+    </fieldset>
+    <button type="submit" aria-label="Xác nhận đặt hàng">Xác nhận đặt hàng</button>
+</body>
+
+</html>
