@@ -133,3 +133,7 @@
 <br>
 
 # PHẦN B — THỰC HÀNH CODE
+## Bài B1 — Form Đăng ký Tài khoản: làm trong file [register.html](register.html)
+### HTML không thể validate confirm password vì:
+- HTML xử lý validation dựa trên từng phần tử độc lập. Nó không có cơ chế mặc định để "biết" giá trị của một ô khác đang là gì để so sánh tại thời điểm thực hiện (runtime). Ví dụ: Nếu so sánh `Giá trị A == Giá trị B`. HTML chỉ có thể hiểu logic đơn lẻ: Nếu `Giá trị A khớp với Quy tắc X`
+- Việc so sánh hai trường dữ liệu đòi hỏi một logic "Nếu A khác B thì báo lỗi". Đây là logic điều kiện thuộc về ngôn ngữ lập trình (như JavaScript) chứ không phải ngôn ngữ đánh dấu (HTML).

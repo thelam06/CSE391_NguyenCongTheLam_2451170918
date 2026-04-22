@@ -94,9 +94,9 @@ Hộp 3
 <br>
 
 # PHẦN B - THỰC HÀNH CODE
-## Bài B1: làm trong [profile.html](profile.html)
+## Bài B1: làm trong file [profile.html](profile.html)
 
-## Bài B2: làm trong [products.html](products.html)
+## Bài B2: làm trong file [products.html](products.html)
 
 ## Bài B3:
 ### Bản sửa trong file [debug.html](debug.html)
