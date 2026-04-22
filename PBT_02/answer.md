@@ -33,4 +33,71 @@
 ##### Nguồn tham chiếu: 07_forms_interactive - mục "Các Input Types HTML5"
 
 ## Câu A3:
+### 1. 
+#### `<label for="email">` quan trọng cho người dùng screen reader vì:
+- Khi người dùng click chuột vào chữ "email", trình duyệt sẽ tự động chuyển trạng thái "focus" (nháy con trỏ) vào ô nhập liệu tương ứng. Điều này cực kỳ hữu ích những người gặp khó khăn về vận động (như run tay) vì nó làm tăng diện tích tiếp xúc.
+- Khi người dùng screen reader dùng trình đọc màn hình để chuyển tiêu điểm (focus) vào ô nhập liệu, trình đọc sẽ thông báo: "Email, edit text". Nếu thiếu label, nó chỉ đọc: "Edit text", khiến người dùng không biết phải điền thông tin gì.
+ 
+### 2. 
+#### Dùng `<fieldset>` + `<legend>` khi:
+- Form dài hoặc có nhiều nhóm thông tin khác biệt (như thông tin cá nhân, địa chỉ thanh toán, thông tin thẻ tín dụng).
+- Dùng cho người dùng screen reader: Khi người dùng screen reader tab vào ô nhập liệu bên trong `<fieldset>`, trình đọc sẽ đọc nội dung của `<legend>` trước, giúp người dùng biết họ đang ở trong "ngữ cảnh" nào.
+#### Ví dụ cụ thể:
+```
+<!-- ✅ Fieldset + Legend cho nhóm liên quan -->
+<fieldset>
+    <legend>Thông tin giao hàng</legend>
+    <label for="addr">Địa chỉ:</label>
+    <input type="text" id="addr" name="addr">
+</fieldset>
+```
+
+### 3. 
+#### aria-label dùng khi:
+- Muốn cung cấp văn bản cho một phần tử (Icon, hình ảnh, emoji).
+- Đặc biệt aria-label hữu ích đối với người dùng screen reader khi các nút bấm chỉ có Icon (như nút ✅, ♿, ➡️). Vì trình đọc màn hình không hiểu hình ảnh/emoji, nên aria-label sẽ cung cấp nội dung cho các Icon để máy đọc được.
+#### KHÔNG nên dùng aria-label khi đã có `<label>` vì:
+- Trình đọc màn hình thường ưu tiên aria-label và ghi đè/bỏ qua nội dung của thẻ `<label>`. Điều này có thể gây ra sự thiếu nhất quán giữa những gì người dùng nhìn thấy và những gì họ nghe thấy.
+- Thẻ <label> tốt hơn aria-label vì nó hỗ trợ cả trình duyệt cũ, hỗ trợ tìm kiếm và cung cấp vùng click chuột lớn hơn (như `<label for="email">`).
 ##### Nguồn tham chiếu: 07_forms_interactive - mục Accessibility — Form cho mọi người
+
+## Câu A4:
+### 1. 
+#### Giải thích thuộc tính loading="lazy" trên thẻ <img>:
+- loading="lazy" là một kỹ thuật trì hoãn việc tải các hình ảnh nằm ngoài vùng nhìn thấy (viewport) của người dùng. Trình duyệt sẽ chỉ bắt đầu tải ảnh khi người dùng cuộn trang đến gần vị trí của tấm ảnh đó.
+#### loading="lazy" cải thiện gì:
+- Giảm dung lượng dữ liệu cần tải ban đầu, từ đó tăng tốc độ tải trang, giúp trang web hiển thị nội dung chính nhanh hơn.
+- Tiết kiệm băng thông, đặc biệt hữu ích cho người dùng di động sử dụng mạng 3G/4G, vì họ sẽ không phải tải những hình ảnh mà họ chưa (hoặc không bao giờ) cuộn tới.
+- Tối ưu tài nguyên hệ thống, giảm tải cho CPU và bộ nhớ của thiết bị vì không phải xử lý nhiều hình ảnh cùng lúc.
+#### Khi nào KHÔNG nên dùng loading="lazy":
+- Ảnh ở đầu trang: Những hình ảnh xuất hiện ngay lập tức khi vừa mở web (như Logo) nếu dùng loading="lazy", nó sẽ làm chậm thời gian hiển thị nội dung quan trọng, gây ảnh hưởng xấu đến điểm SEO.
+- Ảnh nhỏ/Icon quan trọng: Những hình ảnh quá nhẹ hoặc cần xuất hiện ngay lập tức để định hình giao diện.
+
+### 2.
+#### Nên cung cấp nhiều `<source>` trong thẻ `<video>` vì:
+- Hỗ trợ trình duyệt: Không phải trình duyệt nào cũng đọc được mọi định dạng video.
+- Tối ưu dung lượng: Ví dụ ta có thể cung cấp file WebM (nhẹ hơn) cho các trình duyệt hiện đại và file MP4 (nặng hơn nhưng phổ biến) làm phương án dự phòng cho trình duyệt cũ. Trình duyệt sẽ quét từ trên xuống dưới và lấy file đầu tiên mà nó hỗ trợ.
+#### Liệt kê ít nhất 3 format video web phổ biến:
+- MP4 (H.264): Phổ biến nhất, hoạt động trên hầu hết mọi trình duyệt và thiết bị.
+- WebM: Định dạng hiện đại của Google, chất lượng cao nhưng dung lượng rất nhẹ.
+- Ogg/Theora: Một định dạng mã nguồn mở, thường được dùng để dự phòng.
+
+### 3.
+#### Thuộc tính alt trên <img> dùng để:
+- Cung cấp nguồn thông tin chính cho screen reader. Khi người dùng screen reader sử dụng web, máy sẽ đọc nội dung trong thẻ alt để họ hiểu hình ảnh đó đang hiển thị cái gì.
+- Trường hợp lỗi tải ảnh vì đường truyền mạng yếu hoặc file ảnh bị xóa, trình duyệt sẽ hiển thị đoạn văn bản trong thẻ alt này thay vì chỉ để lại một ô trống vô nghĩa.
+- Tối ưu SEO. Các công cụ tìm kiếm như Google không thể "xem" ảnh như người, chúng dựa vào thẻ alt để hiểu nội dung ảnh và xếp hạng chúng trong mục Tìm kiếm hình ảnh (Google Images).
+#### Viết alt tốt cho 3 trường hợp:
+- Ảnh sản phẩm iPhone 16
+<br>
+
+`<img src="iPhone_16" alt="iPhone 16 với thiết kế sang trọng, khung titan chống trầy xước và va đập">`
+- Ảnh trang trí (decorative)
+<br>
+
+`<img src="Ảnh_trang_trí" alt="Thiết kế đẹp mắt, màu sắc hài hoà">`
+- Ảnh biểu đồ doanh thu Q1/2026
+<br>
+
+`<img src="Doanh_thu_Q1/2026" alt="Doanh thu quý I năm 2026">`
+##### Nguồn tham chiếu: 06_graphics_multimedia
