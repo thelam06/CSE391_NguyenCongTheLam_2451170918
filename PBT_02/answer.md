@@ -229,3 +229,8 @@ Sửa: `<form action="#" method="POST">`
 4. 2 rủi ro bảo mật nếu chỉ validate trên Frontend:
 - Kẻ tấn công có thể sử dụng các công cụ như Postman hoặc lệnh curl để gửi mã độc đến Server mà không qua giao diện web, với mục đích chiếm quyền điều khiển cơ sở dữ liệu.
 - Nếu Backend không validate quyền sở hữu hoặc quyền hạn, kẻ tấn công có thể thông qua quyền Admin để thực hiện các thao tác trái phép mà người dùng (User) không thể làm.
+<br>
+
+# PHẦN D — VIDEO THỰC HÀNH OBS
+## Đề bài Video: Code-along "Form đăng ký với HTML5 Validation"
+- Link video: [PBT02_NguyenCongTheLam_2451170918](https://drive.google.com/file/d/1wSbHAEh5h8SxzFyslOungd7XyFF41pAM/view?usp=sharing)
