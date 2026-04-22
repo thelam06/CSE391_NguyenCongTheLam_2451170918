@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form đăng ký tài khoản E-Commerce</title>
+</head>
+
+<body>
+    <form action="#" method="POST">
+        <fieldset>
+            <legend>Thông tin cá nhân</legend>
+            <p>
+                <label for="fullname">Họ tên</label>
+                <input type="text" id="fullname" name="fullname" required minlength="2" maxlength="50"
+                    placeholder="Họ và tên">
+            </p>
+            <p>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="example@gmail.com">
+            </p>
+
+            <p>
+                <label for="phone_number">Số điện thoại</label>
+                <input type="tel" id="phone_number" name="phone_number" pattern="[0-9]{10}"
+                    placeholder="Nhập 10 chữ số">
+            </p>
+
+            <p>
+                <label for="date">Ngày sinh</label>
+                <input type="date" id="date" name="date" max="2026-04-22" placeholder="Ngày tháng năm sinh">
+            </p>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Tài khoản</legend>
+            <p>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" pattern="^[a-zA-Z0-9]{3-20}$"
+                    placeholder="Nhập username">
+            </p>
+
+            <p>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" minlength="8"
+                    pattern="^(?=.*[A-Z])(?=.*[0-9]).{8,}$" placeholder="Nhập password">
+            </p>
+            <p>
+                <label for="confirm_password">Xác nhận Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" minlength="8"
+                    pattern="^(?=.*[A-Z])(?=.*[0-9]).{8,}$" placeholder="Xác nhận password">
+            </p>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Thông tin giao hàng</legend>
+
+            <p>
+                <label for="city">Thành phố</label>
+                <select id="city" name="city">
+                    <option value="">Chọn thành phố</option>
+                    <option value="hanoi">Hà Nội</option>
+                    <option value="hcm">TP. Hồ Chí Minh</option>
+                    <option value="haiphong">Hải phòng</option>
+                    <option value="danang">Đà Nẵng</option>
+                    <option value="nhatrang">Nha Trang</option>
+                </select>
+            </p>
+
+            <p>
+                <label for="district">Quận/Huyện</label>
+                <select id="district" name="district">
+                    <option value="">Chọn Quận/Huyện</option>
+                    <option value="quan1">Quận 1</option>
+                    <option value="badinh">Ba Đình</option>
+                </select>
+            </p>
+            <p>
+                <label for="address">Địa chỉ chi tiết</label>
+                <textarea id="address" name="address" row="3"></textarea>
+            </p>
+
+            <p>
+                <label for="gender">Giới tính</label>
+                <input type=radio id="gender" name="gender" placeholder="Giới tính nam">Nam
+                <input type=radio id="gender" name="gender" placeholder="Giới tính nữ">Nữ
+                <input type=radio id="gender" name="gender" placeholder="Giới tính khác">Khác
+            </p>
+        </fieldset>
+        <p>
+            <input type="checkbox" id="terms" name="terms" placeholder="Click để đồng ý">
+            <label for="terms">Tôi đồng ý với điều khoản sử dụng</label>
+        </p>
+
+        <p>
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </p>
+    </form>
+</body>
+
+</html>
