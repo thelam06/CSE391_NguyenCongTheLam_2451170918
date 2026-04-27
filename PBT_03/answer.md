@@ -192,3 +192,33 @@ Rule D: 11 điểm
 - Do đó, khi thêm !important vào thuộc tính của Rule A -> Rule A có độ độ ưu tiên cao hơn so với 3 Rule còn lại -> Ưu tiên thuộc tính của Rule A.
 
 ##### Nguồn tham chiếu: 09_css_selectors - Phần 3. ⚙️ Core Technical Truth - Mục Specificity: "Ai thắng khi xung đột?"
+
+# PHẦN B — THỰC HÀNH CODE
+## Bài B1 — Style trang Profile
+### 5 loại selector khác nhau:
+- element:
+```
+body
+header
+nav
+table
+```
+- class:
+```
+nav.active
+.noi_dung tr:nth-child(even)
+.noi_dung tr:hover
+```
+- id:
+`#footer`
+- descendant:
+```
+nav a
+table thead th
+```
+- pseudo-class:
+```
+.noi_dung tr:nth-child(even)
+nav:hover
+.noi_dung tr:hover
+```
