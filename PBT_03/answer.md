@@ -36,7 +36,9 @@ h1 { color: #2563eb; font-size: 32px; }
 - Nhược điểm: Tốn thêm một yêu cầu tải file từ server (HTTP Request), nếu file CSS lỗi thì trang web sẽ mất định dạng hoàn toàn.
 #### Khi nào nên dùng: Là tiêu chuẩn cho mọi dự án thực tế, dùng khi website có từ 2 trang trở lên
 
-### Nếu cùng 1 element có cả 3 cách CSS đồng thời áp dụng, cách được viết ở dưới cùng sẽ "thắng" vì:
+### Nếu cùng 1 element có cả 3 cách CSS đồng thời áp dụng, cách dùng Inline sẽ "thắng" vì:
+- Inline nằm "gần" phần tử nhất, áp dụng thuộc tính trực tiếp vào phần tử đó.
+#### Cách viết Internal và External được áp dụng phụ thuộc vào vị trí trong code vì:
 - Trong các ngôn ngữ lập trình, trình biên dịch code sẽ đọc code tuần tự từ trên xuống dưới.
 - Do đó, cách viết CSS ở phía trên sẽ được áp dụng trước, trong khi đó cách viết ở phía dưới sẽ ghi đè lên cách viết trên, và tương tự cho đến cách viết CSS cuối cùng.
 ##### Nguồn tham chiếu: 08_introduction_css - 2. 🌐 Big Picture — CSS hoạt động thế nào? + 3. ⚙️ Core Technical Truth
@@ -107,3 +109,86 @@ h1 { color: #2563eb; font-size: 32px; }
 </header>
 ```
 ##### Nguồn tham chiếu: 09_css_selectors
+
+## Câu A3 — Box Model — Tính toán kích thước
+### Trường hợp 1: content-box (mặc định)
+```
+.box-1 {
+    width: 400px;
+    padding: 20px;
+    border: 5px solid black;
+    margin: 10px;
+}
+```
+-> Chiều rộng hiển thị = 450px
+<br>
+-> Không gian chiếm trên trang = 470px
+<br>
+
+### Trường hợp 2: border-box
+```
+.box-2 {
+    box-sizing: border-box;
+    width: 400px;
+    padding: 20px;
+    border: 5px solid black;
+    margin: 10px;
+}
+```
+-> Chiều rộng hiển thị = 400px
+<br>
+-> Kích thước content thực tế = 330px
+<br>
+-> Không gian chiếm trên trang = 420px
+<br>
+
+### Trường hợp 3: Margin collapse
+```
+.box-a { margin-bottom: 25px; }
+.box-b { margin-top: 40px; }
+```
+-> Khoảng cách giữa box-a và box-b = 40px
+<br>
+-> Giải thích tại sao KHÔNG PHẢI 65px:
+<br>
+- Vì box-a và box-b nằm dọc nhau, mà không có border hay padding để ngăn cách giữa chúng.
+- Do đó xảy ra hiện tượng "Margin collapse": box-b (40px: to hơn) gộp với box-a (25px: nhỏ hơn) -> lấy box-b vì lớn hơn.
+<br>
+→ Nâng cao:
+```
+.box-a { margin-bottom: -10px; }
+.box-b { margin-top: 40px; }
+```
+-> Khoảng cách = 40 + (-10) = 30px
+
+##### Nguồn tham chiếu: 11_box_model
+
+## Câu A4 — Specificity (Độ ưu tiên)
+Cho các CSS rules sau cùng target 1 element `<p class="price" id="main-price">`:
+```
+p { color: black; }                 /* Rule A */
+.price { color: blue; }             /* Rule B */
+#main-price { color: red; }         /* Rule C */
+p.price { color: green; }           /* Rule D */
+```
+### Tính specificity score (a, b, c) cho mỗi rule
+- Rule A: (0, 0, 1)
+- Rule B: (0, 1, 0)
+- Rule C: (1, 0, 0)
+- Rule D: (0, 1, 1)
+### Element sẽ có màu đỏ của Rule C. Giải thích:
+- Ta có cách tính điểm specificity score (a, b, c): a = 100, b = 10, c = 1. Tổng a + b + c càng cao thì thuộc tính càng được ưu tiên.
+- Tính tổng điểm của từng Rule:
+```
+Rule A: 1 điểm
+Rule B: 10 điểm
+Rule C: 100 điểm
+Rule D: 11 điểm
+```
+- Ta thấy Rule C có tổng điểm cao nhất -> Ưu tiên thuộc tính của Rule C.
+### Nếu thêm `<p class="price" id="main-price" style="color: orange;">`, element có màu cam.
+### Nếu Rule A thêm !important, element có màu đen của Rule A, vì:
+- !important có độ ưu tiên cao nhất trong tất cả các Selector.
+- Do đó, khi thêm !important vào thuộc tính của Rule A -> Rule A có độ độ ưu tiên cao hơn so với 3 Rule còn lại -> Ưu tiên thuộc tính của Rule A.
+
+##### Nguồn tham chiếu: 09_css_selectors - Phần 3. ⚙️ Core Technical Truth - Mục Specificity: "Ai thắng khi xung đột?"
