@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    color: black;
+    line-height: 20px;
+}
+
+header {
+    background: linear-gradient(to right, lightblue, lightgreen);
+    color: black;
+    padding: 20px;
+}
+
+nav {
+    background-color: lightcyan;
+    padding: 10px;
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
+}
+
+nav:hover {
+    color: brown;
+    text-decoration: underline;
+}
+
+nav.active {
+    color: yellow;
+    text-decoration: solid;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px black solid;
+}
+
+table thead th {
+    background: brown;
+    color: white;
+}
+
+.noi_dung tr:nth-child(even) {
+    background-color: darkorange;
+}
+
+.noi_dung tr:hover {
+    background-color: lightblue;
+}
+
+#footer {
+    background: yellow;
+    color: lightcoral;
+    text-align: center;
+}
