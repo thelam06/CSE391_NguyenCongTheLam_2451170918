@@ -21,7 +21,7 @@
 ##### Nguồn tham chiếu: 01_introduction_html_universe.md, mục 4.3
 
 ## Câu A2:
-### Trang web bị Google đánh giá SEO thấp vì dùng quá nhiều thẻ <div> thay cho các thẻ HTML có ý nghĩa (Semantic). Điều này làm máy tìm kiếm và trình đọc màn hình khó hiểu cấu trúc nội dung.
+### Trang web bị Google đánh giá SEO thấp vì dùng quá nhiều thẻ `<div>` thay cho các thẻ HTML có ý nghĩa (Semantic). Điều này làm máy tìm kiếm và trình đọc màn hình khó hiểu cấu trúc nội dung.
 ### Lỗi semantic chính:
 - Dùng `<div>` cho phần đầu trang thay vì thẻ `<header>`.
 - Dùng `<div>` cho menu điều hướng thay vì thẻ `<nav>`.

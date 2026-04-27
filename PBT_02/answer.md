@@ -33,13 +33,11 @@
 ##### Nguồn tham chiếu: 07_forms_interactive - mục "Các Input Types HTML5"
 
 ## Câu A3:
-### 1. 
-#### `<label for="email">` quan trọng cho người dùng screen reader vì:
+### 1. `<label for="email">` quan trọng cho người dùng screen reader vì:
 - Khi người dùng click chuột vào chữ "email", trình duyệt sẽ tự động chuyển trạng thái "focus" (nháy con trỏ) vào ô nhập liệu tương ứng. Điều này cực kỳ hữu ích những người gặp khó khăn về vận động (như run tay) vì nó làm tăng diện tích tiếp xúc.
 - Khi người dùng screen reader dùng trình đọc màn hình để chuyển tiêu điểm (focus) vào ô nhập liệu, trình đọc sẽ thông báo: "Email, edit text". Nếu thiếu label, nó chỉ đọc: "Edit text", khiến người dùng không biết phải điền thông tin gì.
  
-### 2. 
-#### Dùng `<fieldset>` + `<legend>` khi:
+### 2. Dùng `<fieldset>` + `<legend>` khi:
 - Form dài hoặc có nhiều nhóm thông tin khác biệt (như thông tin cá nhân, địa chỉ thanh toán, thông tin thẻ tín dụng).
 - Dùng cho người dùng screen reader: Khi người dùng screen reader tab vào ô nhập liệu bên trong `<fieldset>`, trình đọc sẽ đọc nội dung của `<legend>` trước, giúp người dùng biết họ đang ở trong "ngữ cảnh" nào.
 #### Ví dụ cụ thể:
@@ -52,8 +50,7 @@
 </fieldset>
 ```
 
-### 3. 
-#### aria-label dùng khi:
+### 3. aria-label dùng khi:
 - Muốn cung cấp văn bản cho một phần tử (Icon, hình ảnh, emoji).
 - Đặc biệt aria-label hữu ích đối với người dùng screen reader khi các nút bấm chỉ có Icon (như nút ✅, ♿, ➡️). Vì trình đọc màn hình không hiểu hình ảnh/emoji, nên aria-label sẽ cung cấp nội dung cho các Icon để máy đọc được.
 #### KHÔNG nên dùng aria-label khi đã có `<label>` vì:
@@ -83,7 +80,7 @@
 - Ogg/Theora: Một định dạng mã nguồn mở, thường được dùng để dự phòng.
 
 ### 3.
-#### Thuộc tính alt trên <img> dùng để:
+#### Thuộc tính alt trên `<img>` dùng để:
 - Cung cấp nguồn thông tin chính cho screen reader. Khi người dùng screen reader sử dụng web, máy sẽ đọc nội dung trong thẻ alt để họ hiểu hình ảnh đó đang hiển thị cái gì.
 - Trường hợp lỗi tải ảnh vì đường truyền mạng yếu hoặc file ảnh bị xóa, trình duyệt sẽ hiển thị đoạn văn bản trong thẻ alt này thay vì chỉ để lại một ô trống vô nghĩa.
 - Tối ưu SEO. Các công cụ tìm kiếm như Google không thể "xem" ảnh như người, chúng dựa vào thẻ alt để hiểu nội dung ảnh và xếp hạng chúng trong mục Tìm kiếm hình ảnh (Google Images).
@@ -221,12 +218,12 @@ Sửa: `<form action="#" method="POST">`
 - Bất kỳ ai cũng có thể mở công cụ F12 (Developer Tools) trên trình duyệt để xóa thuộc tính required hoặc pattern.
 - HTML5 chỉ kiểm tra được "định dạng", không kiểm tra được logic if-else (kiểm tra thông qua JavaScript).
 
-3. 3 loại Validation HTML5 KHÔNG THỂ làm được (Phải dùng JavaScript):
+3. Ba loại Validation HTML5 KHÔNG THỂ làm được (Phải dùng JavaScript):
 - Kiểm tra xem Số tài khoản hoặc Email đã tồn tại trong hệ thống hay chưa.
 - HTML5 không thể xử lý logic if-else (nếu-thì) giữa các trường dữ liệu.
 - Kiểm tra xem ô "Nhập lại mật khẩu" có trùng khớp 100% với ô "Mật khẩu" đã nhập trước đó hay không.
 
-4. 2 rủi ro bảo mật nếu chỉ validate trên Frontend:
+4. Hai rủi ro bảo mật nếu chỉ validate trên Frontend:
 - Kẻ tấn công có thể sử dụng các công cụ như Postman hoặc lệnh curl để gửi mã độc đến Server mà không qua giao diện web, với mục đích chiếm quyền điều khiển cơ sở dữ liệu.
 - Nếu Backend không validate quyền sở hữu hoặc quyền hạn, kẻ tấn công có thể thông qua quyền Admin để thực hiện các thao tác trái phép mà người dùng (User) không thể làm.
 <br>
