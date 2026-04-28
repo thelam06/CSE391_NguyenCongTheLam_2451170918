@@ -223,15 +223,38 @@ nav:hover
 .noi_dung tr:hover
 ```
 
-# Bài B2 — Box Model Lab
-## Phần 1 — Chứng minh content-box vs border-box
+## Bài B2 — Box Model Lab
+### Phần 1 — Chứng minh content-box vs border-box
 - Hộp 1 (content-box): chiều rộng thực tế = 350 px (đo từ DevTools)
 - Hộp 2 (border-box): chiều rộng thực tế = 300 px (đo từ DevTools)
-### Giải thích sự khác biệt:
-#### Ở hộp 1 (content-box):
+#### Giải thích sự khác biệt:
+##### Ở hộp 1 (content-box):
 - Thuộc tính width:300px chỉ chiều rộng của phần nội dung (content) trong hộp. Mà thực tế ta còn tính thêm chiều rộng của các thuộc tính padding và border.
 - Cụ thể: chiều rộng thực tế của hộp 1 (content-box) = width + padding trái + padding phải + border trái + border phải = 300 + 20 + 20 + 5 + 5 = 350px (đúng với chiều rộng đã đo được ở DevTools).
-#### Ở hộp 2 (border-box):
+##### Ở hộp 2 (border-box):
 - Thuộc tính width:300px chỉ chiều rộng của toàn bộ các thuộc tính content, padding và border. Nên chiều rộng thực tế của hộp 2 (border-box) = 300px (đúng với chiều rộng đã đo được ở DevTools).
 
-## Phần 2 — Layout 3 cột
+### Phần 2 — Layout 3 cột
+
+## Bài B3 — Specificity Battle
+### Liệt kê 10 rules + specificity score
+```
+p { color: magenta; }                       /* Specificity: 0,0,1; Score = 1*/
+.text { color: blue; }                      /* Specificity: 0,1,0; Score = 10*/
+.highlight { color: green; }                /* Specificity: 0,1,0; Score = 10*/
+.text p { color: brown; }                   /* Specificity: 0,1,1; Score = 11*/
+.highlight p { color: yellow; }             /* Specificity: 0,1,1; Score = 11*/
+.text.highlight { color: orange; }          /* Specificity: 0,2,0; Score = 20*/
+#demo { color: purple; }                    /* Specificity: 1,0,0; Score = 100*/
+#demo.text { color: pink; }                 /* Specificity: 1,1,0; Score = 110*/
+#demo.highlight { color: cyan; }            /* Specificity: 1,1,0; Score = 110*/
+#demo.text.highlight { color: red; }        /* Specificity: 1,2,0; Score = 120*/
+```
+### Element cuối cùng hiển thị màu đỏ vì dòng #demo.text.highlight { color: red; } có điểm Specificity Score = 120, cao nhất so với những dòng khác.
+### Thay đổi thứ tự rules trong CSS file. Kết quả có thể thay đổi hoặc không thay đổi vì:
+#### Trường hợp kết quả không thay đổi:
+- Trong CSS file, trình duyệt lấy Rule của thuộc tính có điểm specificity score cao nhất.
+- Do đó, dù có thay đổi thứ tự các Rule thì cũng không làm ảnh hưởng đến kết quả cuối cùng.
+#### Trường hợp kết quả thay đổi:
+- Khi có nhiều hơn 1 Rule có điểm specificity score cao nhất.
+- Khi đó trình duyệt sẽ ưu tiên theo thứ tự từ trên xuống -> Rule ở sau sẽ thắng.
