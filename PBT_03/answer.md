@@ -222,3 +222,16 @@ table thead th
 nav:hover
 .noi_dung tr:hover
 ```
+
+# Bài B2 — Box Model Lab
+## Phần 1 — Chứng minh content-box vs border-box
+- Hộp 1 (content-box): chiều rộng thực tế = 350 px (đo từ DevTools)
+- Hộp 2 (border-box): chiều rộng thực tế = 300 px (đo từ DevTools)
+### Giải thích sự khác biệt:
+#### Ở hộp 1 (content-box):
+- Thuộc tính width:300px chỉ chiều rộng của phần nội dung (content) trong hộp. Mà thực tế ta còn tính thêm chiều rộng của các thuộc tính padding và border.
+- Cụ thể: chiều rộng thực tế của hộp 1 (content-box) = width + padding trái + padding phải + border trái + border phải = 300 + 20 + 20 + 5 + 5 = 350px (đúng với chiều rộng đã đo được ở DevTools).
+#### Ở hộp 2 (border-box):
+- Thuộc tính width:300px chỉ chiều rộng của toàn bộ các thuộc tính content, padding và border. Nên chiều rộng thực tế của hộp 2 (border-box) = 300px (đúng với chiều rộng đã đo được ở DevTools).
+
+## Phần 2 — Layout 3 cột
