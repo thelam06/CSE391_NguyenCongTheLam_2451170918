@@ -193,6 +193,8 @@ Rule D: 11 điểm
 
 ##### Nguồn tham chiếu: 09_css_selectors - Phần 3. ⚙️ Core Technical Truth - Mục Specificity: "Ai thắng khi xung đột?"
 
+<br>
+
 # PHẦN B — THỰC HÀNH CODE
 ## Bài B1 — Style trang Profile
 ### 5 loại selector khác nhau:
@@ -259,6 +261,8 @@ p { color: magenta; }                       /* Specificity: 0,0,1; Score = 1*/
 - Khi có nhiều hơn 1 Rule có điểm specificity score cao nhất.
 - Khi đó trình duyệt sẽ ưu tiên theo thứ tự từ trên xuống -> Rule ở sau sẽ thắng.
 
+<br>
+
 # PHẦN C — DEBUG & SUY LUẬN
 ## Câu C1 — Debug CSS Layout
 ```
@@ -290,3 +294,69 @@ p { color: magenta; }                       /* Specificity: 0,0,1; Score = 1*/
 - width của content = 660 - (padding trái + padding phải + border trái + border phải) = 660 - (30 + 30 + 1 + 1) = 598px
 4. Chứng minh cả 2 cách sửa hoạt động trong file [debug_layout.html](debug_layout.html) và [debug_layout.css](debug_layout.css)
 
+## Câu C2 — Cascade Puzzle
+### Cho CSS file:
+```
+body { font-size: 16px; color: #333; }
+.container { font-size: 14px; }
+.card { color: blue; }
+.card .title { font-size: 20px; }
+.card p { color: inherit; }
+#featured .title { color: red; }
+.highlight { color: green !important; }
+```
+### Và HTML:
+```
+<body>
+    <div class="container">
+        <div class="card" id="featured">
+            <h2 class="title highlight">Sản phẩm A</h2>
+            <p>Mô tả sản phẩm</p>
+        </div>
+        <div class="card">
+            <h2 class="title">Sản phẩm B</h2>
+            <p class="highlight">Mô tả sản phẩm B</p>
+        </div>
+    </div>
+</body>
+```
+#### Tính điểm specificity score cho từng Rule:
+```
+body { font-size: 16px; color: #333; }        Specificity: 0,0,1; Score = 1
+.container { font-size: 14px; }                 Specificity: 0,1,0; Score = 10
+.card { color: blue; }                          Specificity: 0,1,0; Score = 10
+.card .title { font-size: 20px; }               Specificity: 0,2,0; Score = 20
+.card p { color: inherit; }                     Specificity: 0,1,1; Score = 11
+#featured .title { color: red; }                Specificity: 1,1,0; Score = 110
+.highlight { color: green !important; }         Specificity: -,-,-; Score = -
+```
+<hr>
+
+1. "Sản phẩm A" (h2) có font-size = 20px và color = green
+#### Giải thích font-size = 20px
+- Có 3 Rule nhắm vào thẻ "Sản phẩm A" (h2) là .card .title { font-size: 20px; }, .container { font-size: 14px; } và body { font-size: 16px; color: #333; }
+- Trong đó .card .title { font-size: 20px; } có điểm specificity score = 20, cao hơn 2 Rule còn lại -> Áp dụng font-size = 20px cho "Sản phẩm A" (h2)
+#### Giải thích color = green
+- Trong 7 Rule có .highlight { color: green !important; } sử dụng !important -> Áp dụng color = green cho "Sản phẩm A" (h2)
+<hr>
+
+2. "Mô tả sản phẩm" (p trong card featured) có color = blue
+#### Giải thích color = blue
+- Có 3 Rule nhắm vào thẻ "Mô tả sản phẩm" (p trong card featured) là .card p { color: inherit; }, .card { color: blue; } và body { font-size: 16px; color: #333; }
+- Trong đó card p { color: inherit; } có điểm specificity score = 11, cao hơn 2 Rule còn lại -> Áp dụng color = inherit cho thẻ "Mô tả sản phẩm" (p trong card featured). Ý nghĩa của Rule trên là kế thừa màu của thuộc tính cha
+- Màu của thuộc tính cha (`<div class="card" id="featured">`) là color = blue vì có Rule .card { color: blue; } được áp dụng
+- Do đó, "Mô tả sản phẩm" (p trong card featured) sẽ kế thừa thuộc tính color = blue từ `<div class="card" id="featured">` -> Áp dụng color = blue.
+<hr>
+
+3. "Sản phẩm B" (h2) có font-size = 20px và color = blue
+#### Giải thích font-size = 20px
+- Có 2 Rule nhắm vào thẻ "Sản phẩm B" (h2) là .card .title { font-size: 20px; } và body { font-size: 16px; color: #333; }
+- Trong đó .card .title { font-size: 20px; } có điểm specificity score = 20, cao hơn Rule còn lại -> Áp dụng font-size = 20px cho "Sản phẩm B" (h2)
+#### Giải thích color = blue
+- Có 3 Rule nhắm vào thẻ "Sản phẩm B" (h2) là .card { color: blue; } và body { font-size: 16px; color: #333; }
+- Trong đó .card { color: blue; } có điểm specificity score = 10, cao hơn Rule còn lại -> Áp dụng color = blue cho "Sản phẩm B" (h2)
+<hr>
+
+4. "Mô tả sản phẩm B" (p.highlight) có color = green
+#### Giải thích color = green
+- Trong 7 Rule có .highlight { color: green !important; } sử dụng !important -> Áp dụng color = green cho "Mô tả sản phẩm B" (p.highlight)
