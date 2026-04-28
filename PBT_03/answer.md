@@ -258,3 +258,35 @@ p { color: magenta; }                       /* Specificity: 0,0,1; Score = 1*/
 #### Trường hợp kết quả thay đổi:
 - Khi có nhiều hơn 1 Rule có điểm specificity score cao nhất.
 - Khi đó trình duyệt sẽ ưu tiên theo thứ tự từ trên xuống -> Rule ở sau sẽ thắng.
+
+# PHẦN C — DEBUG & SUY LUẬN
+## Câu C1 — Debug CSS Layout
+```
+.container {
+    width: 960px;
+    margin: 0 auto;
+}
+.sidebar {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    float: left;
+}
+.content {
+    width: 660px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    float: left;
+}
+```
+1. Tính chiều rộng thực tế của sidebar và content (content-box!)
+- chiều rộng thực tế của sidebar = width + padding trái + padding phải + border trái + border phải = 300 + 20 + 20 + 1 + 1 = 342px
+- chiều rộng thực tế của content = width + padding trái + padding phải + border trái + border phải = 660 + 30 + 30 + 1 + 1 = 722px
+2. Layout bị vỡ vì chiều rộng của sidebar và content lớn hơn so với container (342 + 722 = 1064 > 960)
+3. Đưa ra 2 cách sửa khác nhau (1 cách dùng border-box, 1 cách không dùng)
+### Cách 1: Dùng border-box: thêm dòng * {box-sizing: border-box;} vào file CSS.
+### Cách 2: Tính toán lại trường width cho sidebar và content:
+- width của sidebar = 300 - (padding trái + padding phải + border trái + border phải) = 30 - (20 + 20 + 1 + 1) = 258px
+- width của content = 660 - (padding trái + padding phải + border trái + border phải) = 660 - (30 + 30 + 1 + 1) = 598px
+4. Chứng minh cả 2 cách sửa hoạt động trong file [debug_layout.html](debug_layout.html) và [debug_layout.css](debug_layout.css)
+
