@@ -20,30 +20,6 @@
 ##### Nguồn tham chiếu: 12_css_positioning
 
 ## Câu A2 — Flexbox vs Grid
-```
-/* Trường hợp 1 */
-.container { display: flex; }
-.item { flex: 1; }
-/* 4 items → Bố cục = ??? */
-
-/* Trường hợp 2 */
-.container { display: flex; flex-wrap: wrap; }
-.item { width: 45%; margin: 2.5%; }
-/* 6 items → Bố cục = ??? (mấy hàng, mấy cột?) */
-
-/* Trường hợp 3 */
-.container { display: flex; justify-content: space-between; align-items: center; }
-/* 3 items → Bố cục = ??? */
-
-/* Trường hợp 4 */
-.container { display: grid; grid-template-columns: 200px 1fr 200px; gap: 20px; }
-/* 3 items → Bố cục = ??? */
-
-/* Trường hợp 5 */
-.container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-/* 7 items → Bố cục = ??? (mấy hàng? item cuối ở đâu?) */
-```
-
 ### Trường hợp 1:
 ```
 .container { display: flex; }
@@ -145,3 +121,7 @@ ________________________________________________
 |______________________________________________|
 ```
 ##### Nguồn tham chiếu: 13_creating_responsive_layouts
+
+# PHẦN B — THỰC HÀNH CODE
+## Bài B2 — Flexbox Navigation & Cards
+### Kết quả bài tập trong file [flexbox-layout.html](flexbox-layout.html) và [flexbox.css](flexbox.css)
