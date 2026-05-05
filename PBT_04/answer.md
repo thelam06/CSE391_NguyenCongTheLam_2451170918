@@ -122,9 +122,14 @@ ________________________________________________
 ```
 ##### Nguồn tham chiếu: 13_creating_responsive_layouts
 
+<br>
+
 # PHẦN B — THỰC HÀNH CODE
 ## Bài B1 — Positioning Playground
 ### Kết quả bài tập trong file [positioning.html](positioning.html) và [positioning.css](positioning.css)
 
 ## Bài B2 — Flexbox Navigation & Cards
 ### Kết quả bài tập trong file [flexbox-layout.html](flexbox_layout.html) và [flexbox.css](flexbox.css)
+
+## Bài B3 — Grid Layout — Trang E-Commerce
+### Kết quả bài tập trong file [grid_layout.html](grid_layout.html) và [grid.css](grid.css)
