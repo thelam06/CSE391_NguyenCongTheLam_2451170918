@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+}
+
+header {
+    position: fixed;
+    height: 60px;
+    width: 100%;
+    background: green;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar {
+    width: 250px;
+    position: sticky;
+    top: 80px;
+}
+
+.product {
+    position: relative;
+}
+
+.product .badge {
+    position: absolute;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    left: 145px;
+}
+
+.scroll_to_top_button {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+}
