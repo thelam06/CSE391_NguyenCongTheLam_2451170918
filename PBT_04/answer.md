@@ -133,3 +133,16 @@ ________________________________________________
 
 ## Bài B3 — Grid Layout — Trang E-Commerce
 ### Kết quả bài tập trong file [grid_layout.html](grid_layout.html) và [grid.css](grid.css)
+
+# PHẦN C — SUY LUẬN
+## Câu C1 — Flexbox vs Grid: Khi nào dùng gì?
+1. Navigation bar ngang (logo + menu + buttons)
+- Dùng flexbox vì ta không biết trước số lượng buttons hay số lượng các phần tử trong menu, và ta có thể dễ dàng căn chỉnh theo trục dọc cho các phần tử khác nhau.
+2. Lưới ảnh Instagram (3 cột đều nhau, số ảnh không biết trước)
+- Dùng grid vì grid phù hợp với bố cục dạng lưới, có biết trước số cột, dễ dàng phân chia thành 3 cột đều nhau cho các ảnh.
+3. Layout blog: main content + sidebar
+- Dùng grid vì có thể chia rõ được vùng nào là main content, vùng nào là sidebar, và có thể dễ dàng thay đổi vị trí của các vùng.
+4. Footer với 4 cột thông tin (Về chúng tôi, Liên kết, Hỗ trợ, Liên hệ)
+- Dùng kết hợp grid và flexbox. Dùng grid để chia footer thành 4 cột thông tin, và dùng flexbox để căn chỉnh các phần tử trong từng cột.
+5. Card sản phẩm (ảnh trên, text giữa, nút dưới — nút luôn dính đáy)
+- Dùng flexbox vì flexbox có thể thay đổi linh hoạt kích thước tuỳ thuộc vào kích thước của các phần tử, đặc biệt để nút luôn dính đáy thì flexbox làm được dễ dàng (với thuộc tính `margin-top: auto;`).
