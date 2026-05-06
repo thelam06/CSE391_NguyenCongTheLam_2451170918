@@ -134,6 +134,8 @@ ________________________________________________
 ## Bài B3 — Grid Layout — Trang E-Commerce
 ### Kết quả bài tập trong file [grid_layout.html](grid_layout.html) và [grid.css](grid.css)
 
+<br>
+
 # PHẦN C — SUY LUẬN
 ## Câu C1 — Flexbox vs Grid: Khi nào dùng gì?
 1. Navigation bar ngang (logo + menu + buttons)
@@ -146,3 +148,72 @@ ________________________________________________
 - Dùng kết hợp grid và flexbox. Dùng grid để chia footer thành 4 cột thông tin, và dùng flexbox để căn chỉnh các phần tử trong từng cột.
 5. Card sản phẩm (ảnh trên, text giữa, nút dưới — nút luôn dính đáy)
 - Dùng flexbox vì flexbox có thể thay đổi linh hoạt kích thước tuỳ thuộc vào kích thước của các phần tử, đặc biệt để nút luôn dính đáy thì flexbox làm được dễ dàng (với thuộc tính `margin-top: auto;`).
+
+## Câu C2 — Debug Flexbox
+### Mô tả lỗi và sửa.
+#### Lỗi 1: Cards không đều chiều cao — nút "Mua" bị nhảy lên/xuống
+```
+.card-container { display: flex; flex-wrap: wrap; }
+.card { width: 30%; margin: 1.5%; }
+.card img { width: 100%; }
+.card h3 { font-size: 18px; }
+.card .btn { padding: 10px; }
+```
+##### Nguyên nhân: Do sự không đồng nhất của nội dung bên trong:
+- Về văn bản: Tiêu đề hoặc mô tả có độ dài dòng khác nhau.
+- Về hình ảnh: Các ảnh có tỷ lệ khung hình khác nhau (cái dọc, cái ngang).
+- Mặc dù các Card có thể cao bằng nhau nhờ Flexbox cha `.card-container`, nhưng các phần tử con bên trong Card lại xếp chồng tự nhiên từ trên xuống, không có cơ chế tự đẩy nút xuống đáy.
+##### Cách sửa:
+- Trong `.card`: thêm dòng `display: flex; flex-direction: column;` để tạo bố cục theo chiều dọc cho từng card.
+- Trong `.card img`: thêm dòng `aspect-ratio: 1/1;` để cho ảnh ngang dọc khác nhau vào một khung chuẩn đồng kích thước, và thêm dòng `object-fit: cover;` để lấp đầy khung đó.
+- Trong `.card .btn`: thêm dòng `margin-top: auto;` để đẩy button xuống đáy card.
+###### Code CSS sau khi sửa:
+```
+.card-container { display: flex; flex-wrap: wrap; }
+.card { width: 30%; margin: 1.5%; display: flex; flex-direction: column; }
+.card img { width: 100%; aspect-ratio: 1/1; object-fit: cover;}
+.card h3 { font-size: 18px; }
+.card .btn { padding: 10px; margin-top: auto; }
+```
+
+#### Lỗi 2: Muốn items nằm giữa cả ngang lẫn dọc trong container 100vh, nhưng item vẫn dính góc trái trên
+```
+.hero {
+    height: 100vh;
+    display: flex;
+}
+.hero-content {
+    text-align: center;
+}
+```
+##### Nguyên nhân: Chỉ mới thiết lập `display: flex;` trong `.hero`, nên theo mặc định nội dung sẽ dính vào góc trên bên trái.
+##### Cách sửa: trong `.hero`: thêm hai dòng `justify-content: center;` và `align-items: center;` để căn giữa theo hai trục dọc và ngang.
+###### Code CSS sau khi sửa:
+```
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hero-content {
+    text-align: center;
+}
+```
+
+#### Lỗi 3: Sidebar bị co lại khi content quá dài
+```
+.layout { display: flex; }
+.sidebar { width: 250px; }
+.content { flex: 1; }
+```
+##### Nguyên nhân:
+- Khi content quá dài, sidebar sẽ tự động co lại để tránh làm vỡ bố cục (layout).
+##### Cách sửa:
+Trong `.sidebar`: Thêm dòng `flex-shrink: 0;` để sidebar không bị co lại khi content quá dài. 
+###### Code CSS sau khi sửa:
+```
+.layout { display: flex; }
+.sidebar { width: 250px; flex-shrink: 0;}
+.content { flex: 1; }
+```
