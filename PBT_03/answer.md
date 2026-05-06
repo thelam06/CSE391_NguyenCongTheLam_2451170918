@@ -361,5 +361,6 @@ body { font-size: 16px; color: #333; }        Specificity: 0,0,1; Score = 1
 #### Giải thích color = green
 - Trong 7 Rule có .highlight { color: green !important; } sử dụng !important -> Áp dụng color = green cho "Mô tả sản phẩm B" (p.highlight)
 
-## PHẦN D — VIDEO THỰC HÀNH OBS
+# PHẦN D — VIDEO THỰC HÀNH OBS
+## Đề bài Video: Code-along "Chứng minh content-box vs border-box"
 - Link video: [PBT03_NguyenCongTheLam_2451170918](https://drive.google.com/file/d/18lCymBe4DSbTy3sotK5JH1L1Fe3N4edI/view?usp=sharing)
