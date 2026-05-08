@@ -140,7 +140,93 @@ Hộp 3
 <br>
 
 # PHẦN C - SUY LUẬN
-## Câu C1 - Kết quả được viết vào flle [product_detail.html](products_detail.html)
+## Câu C1 - Thiết kế cấu trúc
+### Cấu trúc HTML cho trang **chi tiết sản phẩm**
+```
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm</title>
+</head>
+
+<body>
+    <header> <!-- header vì đây là phần đầu của trang -->
+        <nav aria-label="breadcrumb"> <!-- nav vì đây là điều hướng -->
+            <ol> <!-- ol vì breadcrumb có thứ tự-->
+                <li><a href="#">Trang chủ</a></li> <!-- li vì đây là một phần tử trong breadcrumb -->
+                ...
+            </ol>
+        </nav>
+    </header>
+
+    <main> <!-- main vì đây là phần chính của trang -->
+        <section> <!-- section vì đây là một khu vực độc lập chứa thông tin sản phẩm -->
+            <h1>Ảnh sản phẩm</h1> <!-- h2 vì đây là tiêu đề phụ của section -->
+            <figure> <!-- figure vì đây là một phần tử độc lập chứa hình ảnh và chú thích -->
+                <img src="https://placehold.co/300x200" alt="iPhone 16"> <!-- img vì đây là hình ảnh sản phẩm -->
+                <figcaption>Hình ảnh iPhone 16</figcaption> <!-- figcaption vì đây là phần chú thích cho hình ảnh -->
+            </figure>
+            ...
+        </section>
+
+        <section> <!-- section vì đây là một khu vực độc lập chứa thông tin sản phẩm -->
+            <h2>Thông tin sản phẩm</h2>
+            <article> <!-- article vì đây là một phần nội dung độc lập về sản phẩm -->
+                <h3>iPhone 16</h3>
+                <!-- p vì đây là một đoạn văn bản thông tin về sản phẩm -->
+                <p>Tên</p>
+                <p>Giá</p>
+                <p>Đánh giá sao</p>
+                <p>Mô tả</p>
+            </article>
+            ...
+        </section>
+
+        <h2>Bảng thông số kỹ thuật</h2>
+        <table> <!-- table vì đây là một bảng dữ liệu có cấu trúc -->
+
+            <thead> <!-- thead vì đây là phần đầu của bảng chứa tiêu đề cột -->
+                <tr> <!-- tr vì đây là một hàng trong bảng -->
+                    <th>Thông số</th> <!-- th vì đây là một ô tiêu đề cột -->
+                    ...
+                </tr>
+            </thead>
+
+            <tbody> <!-- tbody vì đây là phần thân của bảng chứa dữ liệu -->
+                ...
+            </tbody>
+        </table>
+        <section> <!-- section vì đây là một khu vực độc lập chứa đánh giá và bình luận -->
+            <h2>Đánh giá và bình luận</h2>
+            <div> <!-- div vì đây là container nhóm các bình luận lại -->
+                <article> <!-- article vì đây là một bình luận độc lập từ người dùng -->
+                    <h3>Đánh giá 5/5 sao</h3>
+                    <p>Sản phẩm tuyệt vời, chất lượng rất tốt.</p>
+                </article>
+                ...
+            </div>
+        </section>
+
+        <aside> <!-- aside vì đây là phần nội dung phụ, chứa sản phẩm liên quan -->
+            <h2>Sản phẩm tương tự</h2>
+            <ul> <!-- ul vì đây là danh sách không có thứ tự các sản phẩm -->
+                <a href="#">iPhone 15</a>
+                ...
+            </ul>
+        </aside>
+    </main>
+
+    <footer> <!-- footer vì đây là phần chân của toàn bộ trang web -->
+        <p>&copy; Cửa hàng điện thoại. Tất cả quyền được bảo lưu (2026).</p>
+    </footer>
+
+</body>
+
+</html>
+```
 
 ## Câu C2 - Đoạn phản biện quan điểm của đồng nghiệp:
 - Mặc dù dùng `<div>` cho mọi thứ có vẻ tiết kiệm thời gian, nhưng nhưng nó bỏ qua những vấn đề kỹ thuật và kinh tế lâu dài.
