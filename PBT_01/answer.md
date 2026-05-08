@@ -4,10 +4,10 @@
     - B1: Gõ URL, nhấn Enter.
     - B2: Phân giải tên miền: Trình duyệt yêu cầu DNS trả về địa chỉ IP.
     - B3: Thiết lập kết nối (TCP/IP, HTTP, HTTPS)
-    - B2: Gửi HTTP Request.
-    - B3: Server xử lý.
-    - B4: Server trả về HTTP Response.
-    - B5: Trình duyệt hiện trang.
+    - B4: Gửi HTTP Request.
+    - B5: Server xử lý.
+    - B6: Server trả về HTTP Response.
+    - B7: Trình duyệt hiện trang.
 ##### Nguồn tham chiếu: 01_introduction_html_universe.md, mục 1.1
 
 ### 2. Trong DevTools của Chrome, tab Network cho thấy:
