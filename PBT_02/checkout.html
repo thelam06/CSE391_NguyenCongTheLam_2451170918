@@ -40,13 +40,13 @@
                 <td>1</td>
                 <td>1199 USD</td>
             </tr>
-        <tfoot>
-            <tr>
-                <td colspan="4">Tổng cộng:</td>
-                <td><output>4296 USD</output></td>
-            </tr>
-        </tfoot>
         </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">Tổng cộng:</td>
+                    <td><output>4296 USD</output></td>
+                </tr>
+            </tfoot>
     </table>
 
     <p>
@@ -82,14 +82,14 @@
     <fieldset>
         <legend>Thông tin giao hàng</legend>
         <label for="date">Ngày giao hàng:</label>
-        <input type="date" id="date" name="date" min="2026-23-04">
+        <input type="date" id="date" name="date" min="2026-04-23">
         <select>
             <option value="Morning">Sáng 8-12h</option>
             <option value="Afternoon">Chiều 14-18h</option>
             <option value="Evening">Tối 18-21h</option>
         </select>
         <label for="time">Thời gian giao hàng:</label>
-        <input type="range" min="1" max="7" step="1">
+        <input type="range" id="time" name="time" min="1" max="7" step="1">
     </fieldset>
     <button type="submit" aria-label="Xác nhận đặt hàng">Xác nhận đặt hàng</button>
 </body>
