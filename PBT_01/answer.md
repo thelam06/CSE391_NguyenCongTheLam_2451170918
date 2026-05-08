@@ -2,9 +2,11 @@
 ## Câu A1:
 ### 1. Khi gõ https://shopee.vn vào trình duyệt và nhấn Enter, liệt kê đúng thứ tự ít nhất 5 bước xảy ra (từ DNS lookup đến render):
     - B1: Gõ URL, nhấn Enter.
-    - B2: HTTP Request.
+    - B2: Phân giải tên miền: Trình duyệt yêu cầu DNS trả về địa chỉ IP.
+    - B3: Thiết lập kết nối (TCP/IP, HTTP, HTTPS)
+    - B2: Gửi HTTP Request.
     - B3: Server xử lý.
-    - B4: HTTP Response.
+    - B4: Server trả về HTTP Response.
     - B5: Trình duyệt hiện trang.
 ##### Nguồn tham chiếu: 01_introduction_html_universe.md, mục 1.1
 
@@ -104,17 +106,19 @@ Hộp 3
 #### Lỗi 1: Dòng X — Mô tả lỗi — Cách sửa
 #### Lỗi 2: ...
 - Lỗi 1: Dòng 1 — Thiếu "html" sau DOCTYPE — Sửa thành `<!DOCTYPE html>`
-- Lỗi 2: Dòng 4 — Thiếu thẻ đóng `</title>` — Thêm `</title>` sau "Trang web"  
-- Lỗi 3: Dòng 5 — Charset sai, nên là "utf-8" — Sửa thành `<meta charset="utf-8">`
-- Lỗi 4: Dòng 8 — Thiếu dấu / trong thẻ đóng `</h1>` — Sửa thành `<h1>Welcome to ShopTLU</h1>`
-- Lỗi 5: Dòng 12 — Thiếu dấu / trong thẻ đóng `</a>` — Sửa thành `<a href="home">Trang chủ</a>`  
-- Lỗi 6: Dòng 20 — Thiếu dấu ngoặc kép quanh src — Sửa thành `<img src="iphone.jpg"`  
-- Lỗi 7: Dòng 22 — Thứ tự thẻ đóng sai, `</b>` sau `</p>` — Sửa thành `<p>Giá: <b>25.990.000đ</b></p>` 
-- Lỗi 8: Dòng 40-42 — Có hai thẻ `<main>`, vi phạm semantic HTML5 (chỉ nên có một `<main>`) — Thay thẻ `<main>` thứ hai thành `<aside>` để làm sidebar  
-- Lỗi 9: Dòng 44 — Thiếu thẻ đóng `</p>` — Thêm `</p>` sau "Copyright 2026"    
-- Lỗi 10: Dòng 12 — href="home" nên là URL hợp lệ, semantic — Sửa thành `<a href="#home">Trang chủ</a>` 
-- Lỗi 11: Dòng 13 — href="products" nên là URL hợp lệ — Sửa thành `<a href="products.html">Sản phẩm</a>`
-- Lỗi 12: Dòng 20 — src="iphone.jpg" nên có đường dẫn tương đối đầy đủ — Sửa thành `<img src="images/iphone.jpg" alt="iPhone 16 Pro">` (giả sử trong thư mục images)
+- Lỗi 2: Dòng 2 - Thiếu lang="vi" trong thẻ `<html>` - Sửa thành `<html lang="vi">`
+- Lỗi 3: Dòng 4 — Thiếu thẻ đóng `</title>` — Thêm `</title>` sau "Trang web"  
+- Lỗi 4: Dòng 5 — Charset sai, nên là "utf-8" — Sửa thành `<meta charset="utf-8">`
+- Lỗi 5: Dòng 8 — Thiếu dấu / trong thẻ đóng `</h1>` — Sửa thành `<h1>Welcome to ShopTLU</h1>`
+- Lỗi 6: Dòng 12 — Thiếu dấu / trong thẻ đóng `</a>` — Sửa thành `<a href="home">Trang chủ</a>`  
+- Lỗi 7: Dòng 20 — Thiếu dấu ngoặc kép quanh src — Sửa thành `<img src="iphone.jpg"`  
+- Lỗi 8: Dòng 22 — Thứ tự thẻ đóng sai, `</b>` sau `</p>` — Sửa thành `<p>Giá: <b>25.990.000đ</b></p>` 
+- Lỗi 9: Dòng 40-42 — Có hai thẻ `<main>`, vi phạm semantic HTML5 (chỉ nên có một `<main>`) — Thay thẻ `<main>` thứ hai thành `<aside>` để làm sidebar  
+- Lỗi 10: Dòng 44 — Thiếu thẻ đóng `</p>` — Thêm `</p>` sau "Copyright 2026"    
+- Lỗi 11: Dòng 12 — href="home" nên là URL hợp lệ, semantic — Sửa thành `<a href="#home">Trang chủ</a>` 
+- Lỗi 12: Dòng 13 — href="products" nên là URL hợp lệ — Sửa thành `<a href="products.html">Sản phẩm</a>`
+- Lỗi 13: Dòng 19 + 26 - thẻ `<h3>` viết sau `<h1>` mà bỏ qua `<h2>` - Sửa thành `<h2>`
+- Lỗi 14: Dòng 20 — src="iphone.jpg" nên có đường dẫn tương đối đầy đủ — Sửa thành `<img src="images/iphone.jpg" alt="iPhone 16 Pro">` (giả sử trong thư mục images)
 
 ## Bài B4:
 ### 1. Ba thẻ semantic HTML5 mà trang đó sử dụng (ghi rõ thẻ gì, ở đâu)
