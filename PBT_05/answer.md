@@ -49,3 +49,15 @@
 - Buộc bạn ưu tiên nội dung quan trọng trước (content thinking)
 - Google và performance tools đánh giá cao hơn
 ##### Nguồn tham chiếu: 13_creating_responsive_layouts
+
+## Câu A2 — Breakpoints
+### Ghi lại breakpoints chuẩn:
+| Tên | Kích thước pixel | Thiết bị đại diện | Ví dụ: lưới sản phẩm nên hiển thị mấy cột?
+|---|---|---|---|
+| **Mobile** | < 576px | iPhone SE, các điện thoại nhỏ | 1 cột |
+| **Mobile L** | ≥ 576px | iPhone Plus, điện thoại ngang | 2 cột |
+| **Tablet** | ≥ 768px | iPad dọc, tablet | 2 cột |
+| **Desktop** | ≥ 992px | Laptop nhỏ | 3 cột |
+| **Desktop L** | ≥ 1200px | Desktop, laptop lớn | 3 cột |
+| **Desktop XL** | ≥ 1400px | Màn hình 4K, ultrawide | 4 cột |
+##### Nguồn tham chiếu: 13_creating_responsive_layouts - 3. ⚙️ Core Technical Truth - Breakpoints chuẩn
