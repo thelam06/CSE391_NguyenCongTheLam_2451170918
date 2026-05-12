@@ -61,3 +61,88 @@
 | **Desktop L** | ≥ 1200px | Desktop, laptop lớn | 3 cột |
 | **Desktop XL** | ≥ 1400px | Màn hình 4K, ultrawide | 4 cột |
 ##### Nguồn tham chiếu: 13_creating_responsive_layouts - 3. ⚙️ Core Technical Truth - Breakpoints chuẩn
+
+## Câu A3 — Media Queries
+```
+.container { width: 100%; padding: 10px; }
+
+@media (min-width: 576px) { .container { width: 540px; } }
+@media (min-width: 768px) { .container { width: 720px; } }
+@media (min-width: 992px) { .container { width: 960px; } }
+@media (min-width: 1200px) { .container { width: 1140px; } }
+```
+| Chiều rộng màn hình | `.container` width |
+|---------------------|--------------------|
+| 375px (iPhone SE) | 100% |
+| 600px | 540px |
+| 800px | 720px |
+| 1000px | 960px |
+| 1400px | 1140px |
+##### Nguồn tham chiếu: 13_creating_responsive_layouts - 3. ⚙️ Core Technical Truth - Media Queries — "Nếu màn hình kích thước X → style Y"
+
+## Câu A4 — SCSS Basics
+### Giải thích 4 tính năng chính của SCSS và cho ví dụ:
+#### Variables ($primary-color):
+- Tính năng: Sửa 1 chỗ, tất cả tự đổi
+- Ví dụ:
+```
+// Khai báo Variables
+$color-primary: blue;
+
+// Sử dụng
+.btn-primary {
+    background: $color-primary;
+}
+```
+#### Nesting (viết CSS lồng nhau):
+- Tính năng: CSS theo cấu trúc HTML
+- Ví dụ:
+```
+// SCSS — rõ ràng, dễ đọc
+.navbar {
+    background: blue;
+
+    // & = tham chiếu đến selector cha (.navbar)
+    &__logo {
+        color: white;
+    }
+}
+```
+#### Mixins (@mixin, @include):
+- Tính năng: Hàm CSS tái sử dụng
+- Ví dụ:
+```
+// Định nghĩa mixin
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// Sử dụng
+.modal {
+    @include flex-center;
+}
+```
+#### @extend / Inheritance
+- Tính năng: Chia sẻ thuộc tính giữa các class
+- Ví dụ:
+```
+// Khai báo class
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// Sử dụng
+.hero {
+    @extend .logo; // Kế thừa các thuộc tính của .logo
+}
+```
+### Trình duyệt KHÔNG đọc được file .scss vì:
+- SCSS là ngôn ngữ mở rộng, không phải là CSS thuần túy. Nó chứa các cú pháp mà trình duyệt không biết xử lý như: variables, nesting, mixins.
+- Các tổ chức quốc tế (W3C) đặt ra tiêu chuẩn cho CSS để tất cả trình duyệt chạy giống nhau. SCSS là một công cụ của bên thứ ba tạo ra để giúp lập trình viên viết code nhanh hơn, không phải là một tiêu chuẩn trình duyệt.  
+-> Trình duyệt không đọc được file .scss
+#### Cần biên dịch để chuyển từ SCSS → CSS
+##### Nguồn tham chiếu: 16_sass_scss
