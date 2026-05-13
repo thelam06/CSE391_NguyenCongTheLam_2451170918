@@ -147,10 +147,14 @@ $color-primary: blue;
 #### Cần biên dịch để chuyển từ SCSS → CSS
 ##### Nguồn tham chiếu: 16_sass_scss
 
+<br>
+
 # PHẦN B — THỰC HÀNH CODE
 ## Bài B3 — SCSS Refactor
 ### Code CSS lấy từ file [responsive.css](responsive.css)
 ### Lệnh complie: `sass --watch scss/style.scss:css/style.css`
+
+<br>
 
 # PHẦN C — PHÂN TÍCH
 ## Câu C1 — Phân tích trang web thực
@@ -323,3 +327,9 @@ footer {
     }
 }
 ```
+
+<br>
+
+# PHẦN D — VIDEO THỰC HÀNH OBS
+## Đề bài Video: Code-along "Responsive Product Grid Mobile-First"
+### Link video: [PBT05_NguyenCongTheLam_2451170918](https://drive.google.com/file/d/10LWIItuR1ysAL5ob1fbVMdToN4EdG47X/view?usp=sharing)
