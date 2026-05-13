@@ -1,0 +1,156 @@
+* {
+    box-sizing: border-box;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #000;
+}
+
+.navigation {
+    display: none;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.btn-login {
+    display: none;
+}
+
+.body {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: lightcyan;
+    border: 1px solid #000;
+}
+
+.sidebar {
+    display: none;
+    background: lightyellow;
+    border: 1px solid #000;
+}
+
+.product-card {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #000;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+}
+
+.btn-buy {
+    margin-top: auto;
+}
+
+.ads {
+    display: none;
+    background: lightyellow;
+}
+
+.footer {
+    text-align: center;
+    border: 1px solid #000;
+}
+
+@media (min-width: 768px) {
+    * {
+        font-size: 1.1rem;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navigation {
+        display: flex;
+    }
+
+    .btn-login {
+        display: flex;
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+    .navigation a{
+        margin: 1.4rem;
+    }
+
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-card {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+        margin: 1.2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    * {
+        font-size: 1rem;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+    .navigation a{
+        margin: 1.6rem;
+    }
+
+    .btn-login {
+        display: flex;
+    }
+
+    .body {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-card {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .card {
+        margin: 1.3rem;
+    }
+
+    .ads {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #000;
+    }
+}
