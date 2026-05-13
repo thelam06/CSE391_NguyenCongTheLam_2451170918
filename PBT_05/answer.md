@@ -151,3 +151,13 @@ $color-primary: blue;
 ## Bài B3 — SCSS Refactor
 ### Code CSS lấy từ file [responsive.css](responsive.css)
 ### Lệnh complie: `sass --watch scss/style.scss:css/style.css`
+
+# PHẦN C — PHÂN TÍCH
+## Câu C1 — Phân tích trang web thực
+### 2. Chụp screenshot 3 kích thước màn hình trên trang `tiki.vn` và phân tích:
+| Thiết bị | Navigation thay đổi thế nào? | Lưới content thay đổi mấy cột? | Elements nào bị ẩn trên mobile? | Font size có thay đổi không? |
+|---|---|---|---|---|
+| Mobile (375px) | Bị cắt xén một phần | 6 cột nhưng bị cắt xén, hiển thị thanh cuộn ngang | Không bị ẩn | To nhất |
+| Tablet (768px) | Bị cắt xén một phần | 6 cột nhưng bị cắt xén, hiển thị thanh cuộn ngang | Không bị ẩn | To vừa phải |
+| Desktop (1440px) | Hiển thị đầy đủ | Hiển thị đầy đủ 6 cột | Không bị ẩn | Nhỏ nhất |
+### 3. Hiện tại chưa tìm thấy `@media` rules trên trang `tiki.vn`
