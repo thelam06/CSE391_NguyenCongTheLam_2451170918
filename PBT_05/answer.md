@@ -146,3 +146,8 @@ $color-primary: blue;
 -> Trình duyệt không đọc được file .scss
 #### Cần biên dịch để chuyển từ SCSS → CSS
 ##### Nguồn tham chiếu: 16_sass_scss
+
+# PHẦN B — THỰC HÀNH CODE
+## Bài B3 — SCSS Refactor
+### Code CSS lấy từ file [responsive.css](responsive.css)
+### Lệnh complie: `sass --watch scss/style.scss:css/style.css`

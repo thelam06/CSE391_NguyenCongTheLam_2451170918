@@ -1,0 +1,141 @@
+@use '_variables';
+@use '_mixins';
+
+* {
+    box-sizing: border-box;
+    font-size: variables.$font-mobile;
+    text-decoration: none;
+
+    @include mixins.respond-to("tablet") {
+        font-size: variables.$font-tablet;
+    }
+
+    @include mixins.respond-to("desktop") {
+        font-size: variables.$font-desktop;
+    }
+}
+
+.navbar {
+    @include mixins.flex-between;
+    border: 1px solid variables.$border-color;
+
+    .navigation {
+        display: none;
+        border-left: 1px solid variables.$border-color;
+        border-right: 1px solid variables.$border-color;
+
+        @include mixins.respond-to("tablet") {
+            display: flex;
+        }
+
+        a {
+            @include mixins.respond-to("tablet") {
+                margin: 1.4rem;
+            }
+
+            @include mixins.respond-to("desktop") {
+                margin: 1.6rem;
+            }
+        }
+    }
+
+    .btn-login {
+        display: none;
+
+        @include mixins.respond-to("tablet") {
+            display: flex;
+        }
+
+        @include mixins.respond-to("desktop") {
+            display: flex;
+        }
+    }
+
+    .hamburger {
+        @include mixins.respond-to("tablet") {
+            display: none;
+        }
+
+        @include mixins.respond-to("desktop") {
+            display: none;
+        }
+    }
+}
+
+.body {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: variables.$primary-color;
+    border: 1px solid variables.$border-color;
+
+    @include mixins.respond-to("desktop") {
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+}
+
+.sidebar,
+.ads {
+    display: none;
+    background: variables.$secondary-color;
+    border: 1px solid variables.$border-color;
+
+    @include mixins.respond-to("tablet") {
+        &.sidebar {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    @include mixins.respond-to("desktop") {
+        &.sidebar {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &.ads {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+.product-card {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    @include mixins.respond-to("tablet") {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mixins.respond-to("desktop") {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid variables.$border-color;
+
+        @include mixins.respond-to("tablet") {
+            margin: 1.2rem;
+        }
+
+        @include mixins.respond-to("desktop") {
+            margin: 1.3rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .btn-buy {
+            margin-top: auto;
+        }
+    }
+}
+
+.footer {
+    text-align: center;
+    border: 1px solid variables.$border-color;
+}
