@@ -1,0 +1,37 @@
+@use '_variables';
+
+@mixin respond-to($breakpoint) {
+    @if $breakpoint =="mobile" {
+        @media (max-width: 767px) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =="tablet" {
+        @media (min-width: variables.$breakpoint-tablet) and (max-width: 1023px) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =="desktop" {
+        @media (min-width: variables.$breakpoint-desktop) {
+            @content;
+        }
+    }
+}
+
+@mixin flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@mixin card-shadow($color: rgba(0, 0, 0, 0.1)) {
+    box-shadow: 0 4px 6px -1px $color, 0 2px 4px -1px $color;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 10px 15px -3px $color, 0 4px 6px -2px $color;
+        transform: translateY(-5px);
+    }
+}
