@@ -161,3 +161,165 @@ $color-primary: blue;
 | Tablet (768px) | Bị cắt xén một phần | 6 cột nhưng bị cắt xén, hiển thị thanh cuộn ngang | Không bị ẩn | To vừa phải |
 | Desktop (1440px) | Hiển thị đầy đủ | Hiển thị đầy đủ 6 cột | Không bị ẩn | Nhỏ nhất |
 ### 3. Hiện tại chưa tìm thấy `@media` rules trên trang `tiki.vn`
+
+## Câu C2 - Thiết kế Responsive Strategy
+### Vẽ wireframe (sơ đồ bố cục)
+- Mobile:
+    + Những gì bị ẩn: các hiệu ứng hover phức tạp, đoạn văn bản mô tả món ăn quá dài.
+    + Form nằm đâu: nằm một cột ở chính giữa màn hình.
+```
++---------------------------------------+
+| [LOGO]              [HOTLINE: 1900..] |
++---------------------------------------+
+|                                       |
+|             HERO IMAGE                |
+|                                       |
++---------------------------------------+
+| +-----------+       +-----------+     |
+| |  Food 1   |       |  Food 2   |     |
+| +-----------+       +-----------+     |
+| |  Food 3   |       |  Food 4   |     |
+| +-----------+       +-----------+     |
+| |  Food 5   |       |  Food 6   |     |
+| +-----------+       +-----------+     |
++---------------------------------------+
+|            FORM ĐẶT BÀN               |
+|    [ Ngày ]                           |
+|    [ Giờ ]                            |
+|    [ Số người ]                       |
+|    [ Ghi chú ]                        |
+|           [ NÚT ĐẶT BÀN ]             |
++---------------------------------------+
+|                                       |
+|             GOOGLE MAPS               |
+|                                       |
++---------------------------------------+
+|               FOOTER                  |
++---------------------------------------+
+```
+- Tablet:
+    + Grid ảnh mấy cột: 3 cột, mỗi cột 2 ảnh.
+    + Bản đồ nằm đâu: Nằm ở dưới form, chiếm trọn chiều rộng của trang.
+```
++------------------------------------------------------------+
+| [LOGO]                                   [HOTLINE: 1900..] |
++------------------------------------------------------------+
+|                                                            |
+|                       HERO IMAGE                           |
+|                                                            |
++------------------------------------------------------------+
+| +---------------+    +---------------+   +---------------+ |
+| |    Food 1     |    |    Food 2     |   |    Food 3     | |
+| +---------------+    +---------------+   +---------------+ |
+| +---------------+    +---------------+   +---------------+ |
+| |    Food 4     |    |    Food 5     |   |    Food 6     | |
+| +---------------+    +---------------+   +---------------+ |
++------------------------------------------------------------+
+|                     FORM ĐẶT BÀN                           |
+|        [ Ngày ]  [ Giờ ]  [ Số người ]  [ Ghi chú ]        |
+|                   [ NÚT ĐẶT BÀN ]                          |
++------------------------------------------------------------+
+|                        GOOGLE MAPS                         |
++------------------------------------------------------------+
+| [ Footer cột 1 ]      [ Footer cột 2 ]     [ Footer cột 3 ]|
++------------------------------------------------------------+
+```
+- Desktop: 
+    + Layout bao nhiêu cột: 6 cột.
+    + Sidebar có không: không có Sidebar.
+```
++-----------------------------------------------------------------------+
+| [LOGO]        [Menu 1]  [Menu 2]  [Menu 3]        [HOTLINE: 1900..]   |
++-----------------------------------------------------------------------+
+|                                                                       |
+|                             HERO IMAGE                                |
+|                                                                       |
++-----------------------------------------------------------------------+
+| [Food 1]    [Food 2]    [Food 3]    [Food 4]    [Food 5]    [Food 6]  |
++-----------------------------------------------------------------------+
+|                                                                       |
+|   +-------------------------------------+      +------------------+   |
+|   |          FORM ĐẶT BÀN (60%)         |      |     MAP (40%)    |   |
+|   |                                     |      |                  |   |
+|   |  [ Ngày ]       [ Giờ ]             |      |    GOOGLE MAPS   |   |
+|   |  [ Số người ]   [ Ghi chú ]         |      |                  |   |
+|   |  [ NÚT ĐẶT BÀN ]                    |      |                  |   |
+|   +-------------------------------------+      +------------------+   |
+|                                                                       |
++-----------------------------------------------------------------------+
+| [ Về chúng tôi ]    [ Liên hệ ]    [ Mạng xã hội ]    [ Chính sách ]  |
++-----------------------------------------------------------------------+
+```
+
+### CSS skeleton
+```
+/* Mobile-First */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.hero {
+    height: 60vh;
+    background: white;
+}
+
+.food-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile: 1 cột */
+    gap: 10px;
+}
+
+.booking-section {
+    display: grid;
+    grid-template-columns: 1fr; /* Form và Map chồng nhau */
+    gap: 20px;
+    padding: 20px;
+}
+
+.map {
+    height: 300px;
+    background: white;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+}
+
+/* TABLET (min-width: 768px) */
+@media (min-width: 768px) {
+    .food-grid {
+        grid-template-columns: repeat(3, 1fr); /* Tablet: 3 cột */
+    }
+}
+
+/* DESKTOP (min-width: 1024px) */
+@media (min-width: 1024px) {
+    .hero {
+        height: 80vh;
+    }
+
+    .food-grid {
+        grid-template-columns: repeat(6, 1fr); /* Desktop: 6 cột */
+    }
+
+    .booking-section {
+        grid-template-columns: 3fr 2fr; /* Layout 2 cột: Form chính - Sidebar Map */
+    }
+}
+```
