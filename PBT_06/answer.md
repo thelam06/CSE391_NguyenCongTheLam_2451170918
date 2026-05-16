@@ -111,3 +111,5 @@
 ##### Nguồn tham chiếu: 
 1. bootstrap - 02_grid_system - 3. ⚙️ Core Technical Truth - Container — Lớp bọc ngoài cùng
 2. bootstrap - 04_utilities - 3. ⚙️ Core Technical Truth
+
+# PHẦN B — THỰC HÀNH
