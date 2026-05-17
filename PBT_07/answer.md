@@ -85,3 +85,20 @@ console.log({} + []);                // Kết quả: [object Object]
     + TRỪ/NHÂN/CHIA/% — chỉ áp dụng cho number → convert sang number  
     -> `"5" - 3`: "5" thành 5, sau đó `"5" - 3 = 2`
 ##### Nguồn tham chiếu: tuan_4_javascript_basics - 03_data_types_variables
+
+## Câu A3 — So sánh == vs ===
+### Dự đoán true hay false:
+```
+console.log(5 == "5");                // true
+console.log(5 === "5");               // false
+console.log(null == undefined);       // true
+console.log(null === undefined);      // false
+console.log(NaN == NaN);              // false
+console.log(0 == false);              // true
+console.log(0 === false);             // false
+console.log("" == false);             // true
+```
+### Từ giờ trở đi, nên dùng === thay vì == vì:
+- Dấu `==` tự chuyển kiểu (type) thành kiểu số (number) khi so sánh hai phần tử khác nhau.
+- Dấu `===` kiểm tra cả giá trị và kiểu (type) của các phần tử khi so sánh --> An toàn hơn.
+##### Nguồn tham chiếu: tuan_4_javascript_basics - 02_getting_started - Operators—Toán tử - So sánh-CẨN THẬN với == vs ===
