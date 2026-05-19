@@ -102,3 +102,52 @@ console.log("" == false);             // true
 - Dấu `==` tự chuyển kiểu (type) thành kiểu số (number) khi so sánh hai phần tử khác nhau.
 - Dấu `===` kiểm tra cả giá trị và kiểu (type) của các phần tử khi so sánh --> An toàn hơn.
 ##### Nguồn tham chiếu: tuan_4_javascript_basics - 02_getting_started - Operators—Toán tử - So sánh-CẨN THẬN với == vs ===
+
+## Câu A4 — Truthy & Falsy
+### Liệt kê TẤT CẢ giá trị Falsy trong JavaScript
+1. false
+2. 0
+3. 0n
+4. ""
+5. underfined
+6. NaN
+### Dự đoán kết quả
+```
+if ("0") console.log("A");           // In
+if ("") console.log("B");            // Không in
+if ([]) console.log("C");            // In
+if ({}) console.log("D");            // In
+if (null) console.log("E");          // Không in
+if (0) console.log("F");             // Không in
+if (-1) console.log("G");            // In
+if (" ") console.log("H");           // In
+```
+##### Nguồn tham chiếu: tuan_4_javascript_basics - 03_data_types_variables - 3. ⚙️ Core Technical Truth - Truthy & Falsy—Sáu giá trị "giả" trong JavaScript
+
+## Câu A5 — Template Literals
+### Viết lại 3 cách nối chuỗi bằng template literal 
+1. Cách 1:
+`var greeting = "Xin chào " + name + "! Bạn " + age + " tuổi.";`
+- Viết lại: ```var greeting = `Xin chào ${name}! Bạn ${age} tuổi.`;```
+
+2. Cách 2:
+`var url = "https://api.example.com/users/" + userId + "/orders?page=" + page;`
+- Viết lại: ```var url = `https://api.example.com/users/${userId}/orders?page=${page}`;```
+
+3. Cách 3:
+```
+var html = "<div class=\"card\">" +
+    "<h2>" + title + "</h2>" +
+    "<p>" + description + "</p>" +
+    "<span>Giá: " + price + "đ</span>" +
+    "</div>";
+```
+- Viết lại: 
+```
+var html = `<div class="card">
+    <h2>${title}</h2>
+    <p>${description}</p>
+    <span>Giá: ${price}đ</span>
+    </div>`;
+```
+##### Nguồn tham chiếu: tuan_4_javascript_basics - 02_getting_started
