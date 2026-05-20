@@ -151,3 +151,94 @@ var html = `<div class="card">
     </div>`;
 ```
 ##### Nguồn tham chiếu: tuan_4_javascript_basics - 02_getting_started
+
+# PHẦN C — SUY LUẬN
+## Câu C1 — Debug JavaScript
+```
+function tinhGiaGiamGia(giaBan, phanTramGiam) {
+    if (phanTramGiam < 0 || phanTramGiam > 100) {
+        return "Phần trăm giảm không hợp lệ"
+    }
+    
+    var giamGia = giaBan * phanTramGiam / 100
+    let giaSauGiam = giaBan - giamGia
+    
+    if (giaSauGiam = 0) {
+        console.log("Sản phẩm miễn phí!")
+    }
+    
+    return giaSauGiam
+}
+
+// Test
+const gia = tinhGiaGiamGia("100000", 20)
+console.log("Giá sau giảm: " + gia + "đ")
+
+const gia2 = tinhGiaGiamGia(50000, 110)
+console.log("Giá: " + gia2)
+
+for (var i = 0; i < 5; i++) {
+    setTimeout(function() {
+        console.log("Item " + i)
+    }, 1000)
+}
+```
+### Tìm và sửa TẤT CẢ lỗi trong code:
+1. Lỗi 1: Dòng 3 `return "Phần trăm giảm không hợp lệ"` - kiểu trả về không đồng nhất với dòng 13 `return giaSauGiam`
+- Giải thích: ở nhánh lỗi, hàm trả về một chuỗi `"Phần trăm giảm không hợp lệ"`, còn còn ở nhánh thành công hàm lại trả về một số `giaSauGiam`. Khi gọi hàm dễ gây lỗi tính toán
+- Cách sửa: đồng nhất kiểu trả về:
+```
+return -1
+```
+
+2. Lỗi 2: Dòng 6 `var giamGia = giaBan * phanTramGiam / 100` - dùng kiểu `var` để khai báo
+- Giải thích: kiểu `var` không còn được sử dụng do cơ chế hoisting (đẩy phần khai báo biến lên đầu phạm vi) gây rò rỉ biến và làm code khó kiểm soát khi mở rộng quy mô dự án.
+- Cách sửa: thay kiểu `var` bằng `const` vì giá trị biến `giamGia` sau khi tính xong là cố định:
+```
+const giamGia = giaBan * phanTramGiam / 100
+```
+
+3. Lỗi 3: Dòng 9 `if (giaSauGiam = 0)` - điều kiện if nhưng dùng phép gán `=` thay vì phép so sánh
+- Giải thích: câu lệnh `if (giaSauGiam = 0)` gán 0 (giá trị Falsy) cho biến `giaSauGiam` dẫn đến điều kiện if luôn sai
+- Cách sửa: thay phép gán `=` thành phép so sánh `===`:
+```
+if (giaSauGiam === 0)
+```
+
+4. Lỗi 4: Dòng 10 `console.log("Sản phẩm miễn phí!")` - chèn vào giữa hàm tính toán
+- Giải thích: Hàm tính toán chỉ nên làm đúng 1 nhiệm vụ là tính và trả kết quả. Chèn thêm dòng `console.log("Sản phẩm miễn phí!")` làm giảm khả năng tái sử dụng hàm nếu áp dụng cho nhiều sản phẩm
+- Cách sửa: Bỏ dòng `console.log("Sản phẩm miễn phí!")` trong hàm `tinhGiaGiamGia`, hiển thị thông báo bên ngoài hàm `tinhGiaGiamGia`
+
+5. Lỗi 5: Dòng 17 `const gia = tinhGiaGiamGia("100000", 20)` - sử dụng tham số kiểu chuỗi `"100000"` thay vì số
+- Giải thích: nếu người dùng vô tình truyền tham số kiểu không phải số, kết quả sẽ trả về NaN, gây lỗi cho các dòng code về sau
+- Cách sửa: thêm điều kiện kiểm tra tham số truyền vào
+```
+if (typeof giaBan !== "number" || typeof phanTramGiam !== "number" || Number.isNaN(giaBan) || Number.isNaN(phanTramGiam)) {
+    return `Dữ liệu không phải kiểu số!`; 
+}
+```
+
+6. Lỗi 6: Dòng 18 `console.log("Giá sau giảm: " + gia + "đ")` - sử dụng cú pháp nối chuỗi cũ
+- Giải thích: cú pháp nối chuỗi cũ dễ viết nhầm, rối mắt và không tối ưu bằng cú pháp nối chuỗi Template Literals
+- Cách sửa: thay thế bằng cú pháp nối chuỗi Template Literals
+```
+console.log(`Giá sau giảm: ${gia}đ`)
+```
+
+7. Lỗi 7: Dòng 20 `console.log("Giá: " + gia2)` - sử dụng cú pháp nối chuỗi cũ
+- Giải thích: cú pháp nối chuỗi cũ dễ viết nhầm, rối mắt và không tối ưu bằng cú pháp nối chuỗi Template Literals
+- Cách sửa: thay thế bằng cú pháp nối chuỗi Template Literals
+```
+console.log(`Giá: ${gia2}`)
+```
+
+8. Lỗi ẩn: Dòng 23 - Dùng `var` trong vòng lặp thay vì `let`
+- Giải thích: biến khai báo bằng `var` sử dụng cơ chế Function Scope nên chỉ tạo ra duy nhất 1 ô nhớ cho toàn bộ vòng lặp. Hàm `setTimeout` dùng để thực hiện một lệnh sau một khoảng thời gian nào đó, giá trị để trong hàm là `1000` (1 giây). Trong 1 giây đó, vòng lặp for đã chạy xong và đẩy giá trị của ô nhớ i chung lên số `5`. Do đó sau 1 giây, hàm `setTimeout` sẽ khiến màn hình in ra 5 lần chuỗi Item 5 trùng lặp
+- Cách sửa: thay `var` bằng `let` để tận dụng tính chất Block Scope, tạo ra một ô nhớ i mới độc lập cho từng lượt lặp:
+```
+for (let i = 0; i < 5; i++) {
+    setTimeout(function() {
+        console.log("Item " + i)
+    }, 1000)
+}
+```
