@@ -1,29 +1,3 @@
-/*Cho mảng dữ liệu:
-const students = [
-    { name: "An", math: 8, physics: 7, cs: 9, gender: "M" },
-    { name: "Bình", math: 6, physics: 9, cs: 7, gender: "F" },
-    { name: "Chi", math: 9, physics: 6, cs: 8, gender: "F" },
-    { name: "Dũng", math: 5, physics: 5, cs: 6, gender: "M" },
-    { name: "Em", math: 10, physics: 8, cs: 9, gender: "F" },
-    { name: "Phong", math: 3, physics: 4, cs: 5, gender: "M" },
-    { name: "Giang", math: 7, physics: 7, cs: 7, gender: "F" },
-    { name: "Huy", math: 4, physics: 6, cs: 3, gender: "M" },];
-
-Viết code thực hiện (KHÔNG dùng thư viện, chỉ loops + if/else):
-1. Tính điểm trung bình (math×0.4 + physics×0.3 + cs×0.3) cho mỗi sinh viên
-2. Xếp loại: ≥8.0 Giỏi, ≥6.5 Khá, ≥5.0 Trung bình, <5.0 Yếu
-3. In bảng kết quả:
-| STT | Tên    | TB   | Xếp loại    |
-|-----|--------|------|-------------|
-| 1   | An     | 8.0  | Giỏi        |
-| 2   | Bình   | 7.2  | Khá         |
-...
-
-4. Đếm số SV mỗi xếp loại
-5. Tìm SV có điểm TB cao nhất và thấp nhất
-6. Tính điểm TB toàn lớp cho từng môn
-7. Bonus: Tính điểm TB theo giới tính*/
-
 const students = [
     { name: "An", math: 8, physics: 7, cs: 9, gender: "M" },
     { name: "Bình", math: 6, physics: 9, cs: 7, gender: "F" },
