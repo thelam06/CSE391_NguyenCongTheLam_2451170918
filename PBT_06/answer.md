@@ -112,4 +112,28 @@
 1. bootstrap - 02_grid_system - 3. ⚙️ Core Technical Truth - Container — Lớp bọc ngoài cùng
 2. bootstrap - 04_utilities - 3. ⚙️ Core Technical Truth
 
-# PHẦN B — THỰC HÀNH
+# PHẦN C — PHÂN TÍCH
+## Câu C1 — Tùy biến Bootstrap
+1. Giải thích quy trình đổi màu $primary từ xanh mặc định sang #E63946:
+#### Công cụ:
+- Thư viện Bootstrap: Node.js và npm, cài đặt thông qua lệnh npm install bootstrap
+- Trình biên dịch SASS (SASS Compiler): Live Sass Compiler
+
+#### Modify file nào:
+- Tạo một file riêng (ví dụ: your-custom.scss) chứa các thay đổi được viết bằng SASS
+- Trong thư mục your-custom.scss:
+```
+your-custom.scss
+├── Override $primary: #E63946;  ← TRƯỚC khi import Bootstrap
+├── Override $font-family: '...'; ← TRƯỚC khi import Bootstrap
+└── @import "bootstrap/scss/bootstrap";  ← Bootstrap dùng values của bạn
+```
+
+2. KHÔNG nên override trực tiếp .btn-primary { background: red; } vì:
+- Biến `$primary` không chỉ có `.btn-primary` mà còn có .bg-primary, .text-primary,... Nếu chỉ sửa 1 thuộc tính `.btn-primary` sẽ làm cho giao diện tổng thể rời rạc và thiếu nhất quán.
+- Một class như `.btn-primary` chứa rất nhiều thuộc tính như :hover, :active, :focus,... Nếu override CSS trực tiếp, nút bấm sẽ bị mất toàn bộ các hiệu ứng này, hoặc phải tự tay viết thêm hàng chục dòng CSS khác để override cả :hover, :active, :focus,...
+- Việc override trực tiếp thay vì sửa tận gốc sẽ làm kích thước file tăng, làm giảm hiệu năng hệ thống, khó bảo trì hơn.
+#### Nên dùng SASS variables vì:
+- Khi đổi `$primary: #E63946;`, hàng trăm class khác sử dụng lại biến này (như .text-primary, .bg-primary, .border-primary, các trạng thái alert, badge...) sẽ tự động cập nhật theo màu mới chỉ sau một lần biên dịch.
+- Không phải override :hover, :active, :focus,...
+- Trình biên dịch sẽ thay trực tiếp màu #E63946 vào lõi Bootstrap trước khi xuất sang CSS mà không cần phải viết CSS thừa.
