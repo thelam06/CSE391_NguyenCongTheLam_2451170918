@@ -1,5 +1,5 @@
 function calculate(num1, operator, num2) {
-    if (operator === "/" && num2 === 0 ){
+    if ((operator === "/" || operator === "%") && num2 === 0 ){
         return `Lỗi: Không thể chia cho 0`;
     }
     if (typeof num1 !== "number" || typeof num2 !== "number" || Number.isNaN(num1) || Number.isNaN(num2)){
