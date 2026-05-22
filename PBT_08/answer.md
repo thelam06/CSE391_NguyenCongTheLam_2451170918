@@ -97,7 +97,6 @@ for (let j = 0; j < 3; j++) {
 ## Câu A3 — Array Methods
 ### Cho mảng: `const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
 ### Viết **1 dòng code** cho mỗi yêu cầu (dùng arrow function):
-
 ```javascript
 `1. Lấy các số chẵn                    → [2, 4, 6, 8, 10]`
 const evens = nums.filter((num) => num % 2 === 0);
@@ -117,3 +116,36 @@ const descriptions = nums.map((num) => `Số ${num} là ${num % 2 === 0 ? "chẵ
 const reversed = [...nums].reverse();
 ```
 ##### Nguồn tham chiếu: tuan_4_javascript_basics - (05_functions và 06_arrays_objects)
+
+## Câu A4 — Object Destructuring & Spread
+### Không chạy code, dự đoán output:
+```javascript
+const product = {
+    name: "iPhone 16",
+    price: 25990000,
+    specs: { ram: 8, storage: 256, color: "Titan" }
+};
+
+// Destructuring
+const { name, price, specs: { ram, color } } = product;
+console.log(name, price, ram, color);   // Kết quả: iPhone 16" 25990000 8 Titan
+console.log(specs);                     // Kết quả: Lỗi ReferenceError: specs is not defined
+
+// Spread
+const updated = { ...product, price: 23990000, sale: true };
+console.log(updated.price);            // Kết quả: 23990000
+console.log(updated.sale);             // Kết quả: true
+console.log(product.price);            // Kết quả: 25990000 (gốc không đổi)
+
+// Spread gotcha
+const copy = { ...product };
+copy.specs.ram = 16;
+console.log(product.specs.ram);        // 16 (thay vì 8)
+```
+#### Câu lệnh `console.log(product.specs.ram);` trả về 16 thay vì 8 vì:
+- Toán tử Spread `...` chỉ có thể sao chép (copy) độc lập ở **tầng đầu tiên**, không có khả năng copy tự động các object lồng bên trong (nested object).
+    + Khi viết `const copy = { ...product };`, các thuộc tính tầng 1 như name và price sẽ được copy giá trị sang biến `copy` hoàn toàn độc lập.
+    + Tuy nhiên, thuộc tính specs bản chất lại giữ một địa chỉ vùng nhớ (tham chiếu/pointer) trỏ tới object con { ram: 8, storage: 256, color: "Titan" }.
+    + Khi Spread hoạt động, toán tử Spread chỉ sao chép địa chỉ vùng nhớ đó sang cho `copy.specs`. Vì vậy, cả product.specs và copy.specs hiện tại đang cùng trỏ vào đúng 1 object con duy nhất ở trong bộ nhớ.
+- Hệ quả: Câu lệnh `copy.specs.ram = 16;` sẽ đi theo con đường của copy để sửa ô nhớ dùng chung đó -> nếu dùng console.log(product.specs.ram) -> kết quả thay đổi thành 16
+##### Nguồn tham chiếu: tuan_4_javascript_basics - 08_destructuring_spread
