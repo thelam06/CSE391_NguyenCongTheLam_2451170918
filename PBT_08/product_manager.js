@@ -36,7 +36,6 @@ function cheapestByCategory(products) {
         return accumulator;
     }, {});
 }
-console.log(cheapestByCategory(products));
 // → { phone: {...}, laptop: {...}, tablet: {...}, accessory: {...} }
 
 // 5. Tính tổng giá trị kho (price × stock cho mỗi SP)
@@ -65,3 +64,15 @@ function searchProducts(products, keyword) {
     const cleanKeyword = keyword.toLowerCase().trim();
     return products.filter(product => product.name.toLowerCase().includes(cleanKeyword));
 }
+
+console.log("=== IN-STOCK PRODUCTS ===");
+console.log(getInStock(products));
+
+console.log("\n=== PHONES 15-25 TRIỆU ===");
+console.log(filterProducts(products, "phone", 15000000, 25000000));
+
+console.log("\n=== CHEAPEST BY CATEGORY ===");
+console.log(cheapestByCategory(products));
+
+console.log("\n=== TOTAL INVENTORY VALUE ===");
+console.log(totalInventoryValue(products).toLocaleString() + "đ");
