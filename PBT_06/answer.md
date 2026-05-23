@@ -137,3 +137,182 @@ your-custom.scss
 - Khi đổi `$primary: #E63946;`, hàng trăm class khác sử dụng lại biến này (như .text-primary, .bg-primary, .border-primary, các trạng thái alert, badge...) sẽ tự động cập nhật theo màu mới chỉ sau một lần biên dịch.
 - Không phải override :hover, :active, :focus,...
 - Trình biên dịch sẽ thay trực tiếp màu #E63946 vào lõi Bootstrap trước khi xuất sang CSS mà không cần phải viết CSS thừa.
+
+## Câu C2 (10đ) — So sánh
+### Viết CSS thuần để tạo 1 navbar responsive + 1 product card.
+```html
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive</title>
+    <link rel="stylesheet" href="responsive.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <button class="hamburger">☰</button>
+        <h2 class="logo">Cửa hàng điện tử</h2>
+        <nav class="navigation">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <button class="btn-login">Login</button>
+    </header>
+    <main class="body">
+        <section class="product-card">
+            <article class="card">
+                <img src="https://placehold.co/200x300" alt="iPhone 17 Pro Max">
+                <h4>iPhone 17 Pro Max 256GB</h4>
+                <p>Giá: 37.000.000đ</p>
+                <button class="btn-buy">Mua</button>
+            </article>
+        </section>
+    </main>
+</body>
+
+</html>
+```
+
+```CSS thuần
+* {
+    box-sizing: border-box;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #000;
+}
+
+.navigation {
+    display: none;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.btn-login {
+    display: none;
+}
+
+.body {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: lightcyan;
+    border: 1px solid #000;
+}
+
+.product-card {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #000;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+}
+
+.btn-buy {
+    margin-top: auto;
+}
+
+@media (min-width: 768px) {
+    * {
+        font-size: 1.1rem;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navigation {
+        display: flex;
+    }
+
+    .btn-login {
+        display: flex;
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+    .navigation a{
+        margin: 1.4rem;
+    }
+
+    .product-card {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+        margin: 1.2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    * {
+        font-size: 1rem;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+    .navigation a{
+        margin: 1.6rem;
+    }
+
+    .btn-login {
+        display: flex;
+    }
+
+    .body {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+
+    .product-card {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .card {
+        margin: 1.3rem;
+    }
+}
+```
+### So sánh với Bootstrap version:
+| Tiêu chí | CSS version | Bootstrap version |
+|---|---|---|
+| Số dòng CSS cần viết | Khoảng hơn 100 dòng, do phải tự viết lại từ đầu | Gần như bằng 0, do chỉ phải gọi class đã được định nghĩa sẵn |
+| Thời gian phát triển | Lâu hơn | Nhanh hơn |
+| Khả năng tùy biến | Xuất sắc, do tự viết code nên có thể tự do tuỳ biến theo ý người viết | Hạn chế hơn do lấy "khuôn" có sẵn, muốn tuỳ biến phải override CSS hoặc dùng SCSS |
+- NÊN dùng Bootstrap khi:
+    + Cần làm dự án nhanh, tiến độ gấp, không quá khắt khe về giao diện
+    + Dùng trong các dự án Admin Dashboard, nơi cần sự chuẩn hoá về form nhập liệu, bảng số liệu, thống kê,...
+    + Trong nhóm có ít người có khả năng code giỏi
+- KHÔNG NÊN dùng Bootstrap khi:
+    + Làm sản phẩm Landing Page sáng tạo, Portfolio cá nhân, những trang web đòi hỏi tính nghệ thuật, hoạt họa (Animation) phức tạp, độc đáo và mang bản sắc riêng
+    + Khi cần tối ưu SEO và tốc độ tải trang, việc gánh thêm một framework cồng kềnh sẽ làm giảm hiệu năng tổng thể
