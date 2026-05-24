@@ -2,21 +2,21 @@
 ## Câu A1 — var / let / const
 ### Không chạy code, dự đoán output cho từng đoạn
 1. Đoạn 1
-```
+```javascript
 console.log(x);
 var x = 5;
 ```
 - Dự đoán output: 5
 
 2. Đoạn 2
-```
+```javascript
 console.log(y);
 let y = 10;
 ```
 - Dự đoán output: 10
 
 3. Đoạn 3
-```
+```javascript
 const z = 15;
 z = 20;
 console.log(z);
@@ -24,7 +24,7 @@ console.log(z);
 - Dự đoán output: 15
 
 4. Đoạn 4
-```
+```javascript
 const arr = [1, 2, 3];
 arr.push(4);
 console.log(arr);
@@ -32,7 +32,7 @@ console.log(arr);
 - Dự đoán output: [ 1, 2, 3, 4 ]
 
 5. Đoạn 5
-```
+```javascript
 let a = 1;
 {
     let a = 2;
@@ -54,7 +54,7 @@ console.log("Ngoài block:", a);
 
 ## Câu A2 — Data Types & Coercion
 ### Không chạy code, dự đoán kết quả:
-```
+```javascript
 console.log(typeof null);            // Dự đoán: null
 console.log(typeof undefined);       // Dự đoán: undefined
 console.log(typeof NaN);             // Dự đoán: NaN
@@ -67,7 +67,7 @@ console.log([] + {});                // Dự đoán: []{}
 console.log({} + []);                // Dự đoán: {}[]
 ```
 ### Chạy code kiểm tra
-```
+```javascript
 console.log(typeof null);            // Kết quả: object
 console.log(typeof undefined);       // Kết quả: undefined
 console.log(typeof NaN);             // Kết quả: number
@@ -88,7 +88,7 @@ console.log({} + []);                // Kết quả: [object Object]
 
 ## Câu A3 — So sánh == vs ===
 ### Dự đoán true hay false:
-```
+```javascript
 console.log(5 == "5");                // true
 console.log(5 === "5");               // false
 console.log(null == undefined);       // true
@@ -112,7 +112,7 @@ console.log("" == false);             // true
 5. underfined
 6. NaN
 ### Dự đoán kết quả
-```
+```javascript
 if ("0") console.log("A");           // In
 if ("") console.log("B");            // Không in
 if ([]) console.log("C");            // In
@@ -128,14 +128,20 @@ if (" ") console.log("H");           // In
 ### Viết lại 3 cách nối chuỗi bằng template literal 
 1. Cách 1:
 `var greeting = "Xin chào " + name + "! Bạn " + age + " tuổi.";`
-- Viết lại: ```var greeting = `Xin chào ${name}! Bạn ${age} tuổi.`;```
+- Viết lại:
+```javascript
+var greeting = `Xin chào ${name}! Bạn ${age} tuổi.`;
+```
 
 2. Cách 2:
 `var url = "https://api.example.com/users/" + userId + "/orders?page=" + page;`
-- Viết lại: ```var url = `https://api.example.com/users/${userId}/orders?page=${page}`;```
+- Viết lại: 
+```javascript
+var url = `https://api.example.com/users/${userId}/orders?page=${page}`;
+```
 
 3. Cách 3:
-```
+```javascript
 var html = "<div class=\"card\">" +
     "<h2>" + title + "</h2>" +
     "<p>" + description + "</p>" +
@@ -143,7 +149,7 @@ var html = "<div class=\"card\">" +
     "</div>";
 ```
 - Viết lại: 
-```
+```javascript
 var html = `<div class="card">
     <h2>${title}</h2>
     <p>${description}</p>
@@ -154,7 +160,7 @@ var html = `<div class="card">
 
 # PHẦN C — SUY LUẬN
 ## Câu C1 — Debug JavaScript
-```
+```javascript
 function tinhGiaGiamGia(giaBan, phanTramGiam) {
     if (phanTramGiam < 0 || phanTramGiam > 100) {
         return "Phần trăm giảm không hợp lệ"
@@ -187,21 +193,21 @@ for (var i = 0; i < 5; i++) {
 1. Lỗi 1: Dòng 3 `return "Phần trăm giảm không hợp lệ"` - kiểu trả về không đồng nhất với dòng 13 `return giaSauGiam`
 - Giải thích: ở nhánh lỗi, hàm trả về một chuỗi `"Phần trăm giảm không hợp lệ"`, còn còn ở nhánh thành công hàm lại trả về một số `giaSauGiam`. Khi gọi hàm dễ gây lỗi tính toán
 - Cách sửa: đồng nhất kiểu trả về:
-```
+```javascript
 return -1
 ```
 
 2. Lỗi 2: Dòng 6 `var giamGia = giaBan * phanTramGiam / 100` - dùng kiểu `var` để khai báo
 - Giải thích: kiểu `var` không còn được sử dụng do cơ chế hoisting (đẩy phần khai báo biến lên đầu phạm vi) gây rò rỉ biến và làm code khó kiểm soát khi mở rộng quy mô dự án.
 - Cách sửa: thay kiểu `var` bằng `const` vì giá trị biến `giamGia` sau khi tính xong là cố định:
-```
+```javascript
 const giamGia = giaBan * phanTramGiam / 100
 ```
 
 3. Lỗi 3: Dòng 9 `if (giaSauGiam = 0)` - điều kiện if nhưng dùng phép gán `=` thay vì phép so sánh
 - Giải thích: câu lệnh `if (giaSauGiam = 0)` gán 0 (giá trị Falsy) cho biến `giaSauGiam` dẫn đến điều kiện if luôn sai
 - Cách sửa: thay phép gán `=` thành phép so sánh `===`:
-```
+```javascript
 if (giaSauGiam === 0)
 ```
 
@@ -212,7 +218,7 @@ if (giaSauGiam === 0)
 5. Lỗi 5: Dòng 17 `const gia = tinhGiaGiamGia("100000", 20)` - sử dụng tham số kiểu chuỗi `"100000"` thay vì số
 - Giải thích: nếu người dùng vô tình truyền tham số kiểu không phải số, kết quả sẽ trả về NaN, gây lỗi cho các dòng code về sau
 - Cách sửa: thêm điều kiện kiểm tra tham số truyền vào
-```
+```javascript
 if (typeof giaBan !== "number" || typeof phanTramGiam !== "number" || Number.isNaN(giaBan) || Number.isNaN(phanTramGiam)) {
     return `Dữ liệu không phải kiểu số!`; 
 }
@@ -221,24 +227,27 @@ if (typeof giaBan !== "number" || typeof phanTramGiam !== "number" || Number.isN
 6. Lỗi 6: Dòng 18 `console.log("Giá sau giảm: " + gia + "đ")` - sử dụng cú pháp nối chuỗi cũ
 - Giải thích: cú pháp nối chuỗi cũ dễ viết nhầm, rối mắt và không tối ưu bằng cú pháp nối chuỗi Template Literals
 - Cách sửa: thay thế bằng cú pháp nối chuỗi Template Literals
-```
+```javascript
 console.log(`Giá sau giảm: ${gia}đ`)
 ```
 
 7. Lỗi 7: Dòng 20 `console.log("Giá: " + gia2)` - sử dụng cú pháp nối chuỗi cũ
 - Giải thích: cú pháp nối chuỗi cũ dễ viết nhầm, rối mắt và không tối ưu bằng cú pháp nối chuỗi Template Literals
 - Cách sửa: thay thế bằng cú pháp nối chuỗi Template Literals
-```
+```javascript
 console.log(`Giá: ${gia2}`)
 ```
 
 8. Lỗi ẩn: Dòng 23 - Dùng `var` trong vòng lặp thay vì `let`
 - Giải thích: biến khai báo bằng `var` sử dụng cơ chế Function Scope nên chỉ tạo ra duy nhất 1 ô nhớ cho toàn bộ vòng lặp. Hàm `setTimeout` dùng để thực hiện một lệnh sau một khoảng thời gian nào đó, giá trị để trong hàm là `1000` (1 giây). Trong 1 giây đó, vòng lặp for đã chạy xong và đẩy giá trị của ô nhớ i chung lên số `5`. Do đó sau 1 giây, hàm `setTimeout` sẽ khiến màn hình in ra 5 lần chuỗi Item 5 trùng lặp
 - Cách sửa: thay `var` bằng `let` để tận dụng tính chất Block Scope, tạo ra một ô nhớ i mới độc lập cho từng lượt lặp:
-```
+```javascript
 for (let i = 0; i < 5; i++) {
     setTimeout(function() {
         console.log("Item " + i)
     }, 1000)
 }
 ```
+
+# PHẦN D — VIDEO THỰC HÀNH OBS
+- Link video: [PBT07_NguyenCongTheLam_2451170918](https://drive.google.com/file/d/1hg5NrHvS7q_RuVrIIXfjZOkbiHzJ47E2/view?usp=sharing)
