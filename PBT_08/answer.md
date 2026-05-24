@@ -149,3 +149,48 @@ console.log(product.specs.ram);        // 16 (thay vì 8)
     + Khi Spread hoạt động, toán tử Spread chỉ sao chép địa chỉ vùng nhớ đó sang cho `copy.specs`. Vì vậy, cả product.specs và copy.specs hiện tại đang cùng trỏ vào đúng 1 object con duy nhất ở trong bộ nhớ.
 - Hệ quả: Câu lệnh `copy.specs.ram = 16;` sẽ đi theo con đường của copy để sửa ô nhớ dùng chung đó -> nếu dùng console.log(product.specs.ram) -> kết quả thay đổi thành 16
 ##### Nguồn tham chiếu: tuan_4_javascript_basics - 08_destructuring_spread
+
+# PHẦN C — SUY LUẬN
+## Câu C1 — Refactor Code
+```javascript
+// TRƯỚC (ugly code):
+function processOrders(orders) {
+    var result = [];
+    for (var i = 0; i < orders.length; i++) {
+        if (orders[i].status === "completed") {
+            if (orders[i].total > 100000) {
+                var item = {};
+                item.id = orders[i].id;
+                item.customer = orders[i].customer;
+                item.total = orders[i].total;
+                item.discount = orders[i].total * 0.1;
+                item.finalTotal = orders[i].total - item.discount;
+                result.push(item);
+            }
+        }
+    }
+    // Sort by finalTotal descending
+    for (var j = 0; j < result.length; j++) {
+        for (var k = j + 1; k < result.length; k++) {
+            if (result[j].finalTotal < result[k].finalTotal) {
+                var temp = result[j];
+                result[j] = result[k];
+                result[k] = temp;
+            }
+        }
+    }
+    return result;
+}
+```
+### **Refactor** thành ≤ 10 dòng dùng `filter`, `map`, `sort`, destructuring, array methods + arrow functions:
+```javascript
+const processOrders = orders => orders
+        .filter(({status, total}) => status === "completed" && total > 100000)
+        .map(({id, customer, total}) => ({
+            id, customer, total,
+            discount: total * 0.1,
+            finalTotal: total * 0.9
+        }))
+    // Sort by finalTotal descending
+    .sort((a, b) => b.finalTotal - a.finalTotal);
+```
