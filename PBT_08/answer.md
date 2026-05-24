@@ -194,3 +194,43 @@ const processOrders = orders => orders
     // Sort by finalTotal descending
     .sort((a, b) => b.finalTotal - a.finalTotal);
 ```
+
+## Câu C2 — Thiết kế API
+### Thiết kế một thư viện JS nhỏ `miniArray` cung cấp `map`, `filter`, `reduce`  (không dùng built-in).
+```javascript
+const miniArray = {
+    map(arr, fn) {
+        // Implement: giống Array.prototype.map
+        const result = [];
+        for(let i = 0; i < arr.length; i++){
+            result.push(fn(arr[i], i, arr));
+        }
+        return result;
+    },
+    filter(arr, fn) {
+        // Implement: giống Array.prototype.filter
+        const result = [];
+        for (let i = 0; i < arr.length; i++) {
+            if (fn(arr[i], i, arr)) {
+                result.push(arr[i]);
+            }
+        }
+        return result;
+    },
+    reduce(arr, fn, initialValue) {
+        // Implement: giống Array.prototype.reduce
+        const hasInitialValue = initialValue !== undefined;
+        let accumulator = hasInitialValue ? initialValue : arr[0];
+        const startIndex = hasInitialValue ? 0 : 1;
+        for (let i = startIndex; i < arr.length; i++) {
+            accumulator = fn(accumulator, arr[i], i, arr);
+        }
+        return accumulator;
+    }
+};
+
+// Test phải pass:
+console.log(miniArray.map([1,2,3], x => x * 2));        // → [2,4,6]
+console.log(miniArray.filter([1,2,3,4], x => x > 2));    // → [3,4]
+console.log(miniArray.reduce([1,2,3,4], (a,b) => a+b, 0)); // → 10
+```
