@@ -316,3 +316,6 @@ your-custom.scss
 - KHÔNG NÊN dùng Bootstrap khi:
     + Làm sản phẩm Landing Page sáng tạo, Portfolio cá nhân, những trang web đòi hỏi tính nghệ thuật, hoạt họa (Animation) phức tạp, độc đáo và mang bản sắc riêng
     + Khi cần tối ưu SEO và tốc độ tải trang, việc gánh thêm một framework cồng kềnh sẽ làm giảm hiệu năng tổng thể
+
+# PHẦN D — VIDEO THỰC HÀNH OBS (25 điểm)
+- Link video: [PBT06_NguyenCongTheLam_2451170918](https://drive.google.com/file/d/1bhhzdWDooUlDEvzpNEKwbKXSDSMVJyTj/view?usp=sharing)
