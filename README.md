@@ -10,6 +10,6 @@ Trường Đại học Thuỷ Lợi
 - PBT_03: Đã hoàn thành
 - PBT_04: Đã hoàn thành
 - PBT_05: Đã hoàn thành
-- PBT_06: Đang hoàn thành
+- PBT_06: Đã hoàn thành
 - PBT_07: Đang hoàn thành
 - PBT_08: Đang hoàn thành
