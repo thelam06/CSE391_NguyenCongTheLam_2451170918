@@ -66,3 +66,39 @@ const firstLi = document.querySelector("#todoList li:first-child");
 const navA = document.querySelectorAll("nav a");
 ```
 ##### Nguồn tham chiếu: tuan_5_javascript_dom_async - 19_dom_manipulation
+
+## Câu A2 — innerHTML vs textContent
+### Giải thích sự khác nhau. Cho ví dụ khi nào dùng mỗi cái.
+| Tiêu chí | innerHTML | textContent |
+|---|---|---|
+| Đọc | Text + HTML tags bên trong | Chỉ text, không có HTML tags |
+| Sửa | ⚠️ Parse HTML — nguy cơ XSS (Cross-Site Scripting)! | ✅ An toàn — không parse HTML |
+| Khi nào dùng | Khi cần chèn một cấu trúc HTML phức tạp (không liên quan đến User Input) | Khi cập nhật nội dung dạng chữ của một phần tử (đổi tên, hiện thông báo,...) |
+| Dùng trong user input | ❌ Nguy hiểm — chạy script! | ✅ An toàn — hiện text literal |
+#### Ví dụ
+- innerHTML:
+```javascript
+// Khi hiển thị sẽ thêm định dạng chữ cho thông báo (in đậm, in nghiêng)
+const alertBox = document.querySelector("#alert");
+alertBox.innerHTML = "<strong>Cảnh báo:</strong> Bạn <em>chưa nhập</em> mật khẩu!";
+```
+- textContent:
+```javascript
+// Đổi tên người dùng
+const userName = document.querySelector(".user-name");
+userName.textContent = "Nguyễn Văn A";
+```
+### Câu hỏi bảo mật: innerHTML có thể gây lỗ hổng XSS vì:
+- Khi dùng innerHTML để hiển thị một chuỗi chữ do người dùng nhập, trình duyệt sẽ coi chuỗi chữ đó là lệnh HTML hợp pháp. Hacker sẽ lợi dụng điều này để lừa được trình duyệt của nạn nhân **tự động chạy một đoạn code mã độc** (JavaScript) như onerror, onload, onmouseover.
+#### Viết 1 ví dụ code minh họa:
+```javascript
+// Giả sử user nhập vào input: <img src=x onerror="alert('Hacked!')">
+const userInput = document.querySelector("#search").value;
+document.querySelector("#result").innerHTML = userInput;  // ← Nguy hiểm!
+```
+- Cách sửa: thay thế `innerHTML` thành `textContent`:
+```javascript
+// Giả sử user nhập vào input: <img src=x onerror="alert('Hacked!')">
+const userInput = document.querySelector("#search").value;
+document.querySelector("#result").textContent = userInput;  // ← An toàn hơn!
+```
