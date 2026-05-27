@@ -102,3 +102,4 @@ document.querySelector("#result").innerHTML = userInput;  // ← Nguy hiểm!
 const userInput = document.querySelector("#search").value;
 document.querySelector("#result").textContent = userInput;  // ← An toàn hơn!
 ```
+##### Nguồn tham chiếu: tuan_5_javascript_dom_async - 19_dom_manipulation - 3. ⚙️ Core Technical Truth - Đọc & Sửa Elements

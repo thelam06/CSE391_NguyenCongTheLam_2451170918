@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Validator</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <form class="validator-form">
+        <h1>Đăng ký tài khoản</h1>
+        <div class="input">
+            <label for="name">Tên</label>
+            <div class="input-block">
+                <input type="text" id="username" placeholder="Ví dụ: Nguyễn Văn A">
+                <span class="name-error-message"></span>
+            </div>
+        </div>
+
+        <div class="input">
+            <label for="email">Email</label>
+            <div class="input-block">
+                <input type="email" id="email"placeholder="Ví dụ: nguyenvana@gmail.com">
+                <span class="email-error-message"></span>
+            </div>
+        </div>
+
+        <div class="input">
+            <label for="password">Mật khẩu</label>
+            <div class="input-block">
+                <input type="password" id="password">
+                <span class="password-error-message"></span>
+                <div class="password-strength-bar">
+                    <div id="strength-progress"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="input">
+            <label for="confirm-password">Nhập lại mật khẩu</label>
+            <div class="input-block">
+                <input type="password" id="confirm-password">
+                <span class="confirm-password-error-message"></span>
+            </div>
+        </div>
+
+        <div class="input">
+            <label for="phone-number">Số điện thoại</label>
+            <div class="input-block">
+                <input type="tel" id="phone-number">
+                <span class="phone-number-error-message"></span>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Xác nhận</button>
+    </form>
+
+    <div id="success-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>🎉 Đăng ký thành công</h2>
+            <hr>
+
+            <p><strong>Họ và tên:</strong>
+                <span id="result-name"></span>
+            </p>
+
+            <p><strong>Email:</strong>
+                <span id="result-email"></span>
+            </p>
+            <p><strong>Số điện thoại:</strong>
+                <span id="result-phone"></span>
+            </p>
+            <button type="button" class="btn-close-modal">Đóng</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
