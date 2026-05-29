@@ -36,3 +36,39 @@ Promise.resolve().then(() => {
 3. Macrotask Queue:
 - Nơi xếp hàng của các tác vụ bất đồng bộ thông thường, chủ yếu là setTimeout, setInterval và các sự kiện click/input của người dùng
 ##### Nguồn tham chiếu: tuan_5_javascript_dom_async - 20_ajax_async
+
+## Câu A2 — Fetch API
+```javascript
+async function getData() {
+    try {
+        const response = await fetch("https://api.example.com/data");
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Failed:", error.message);
+        return null;
+    }
+}
+```
+### Giải thích từng dòng code:
+1. await fetch(...)
+- fetch trả về một Promise. Khi hoàn thành, Promise trả về Response.
+- Cần await để tạm dừng việc thực hiện các dòng code tiếp theo trong hàm async cho đến khi hoàn thành Promise thì mới chạy xuống dòng dưới
+2. response.ok
+- response.ok chuyển sang false khi máy chủ (server) nhận được yêu cầu nhưng phản hồi về một mã trạng thái HTTP (status code) nằm ngoài khoảng thành công (từ 200 đến 299)
+- 3 status codes tương ứng:
+    + 301 Moved Permanently
+    + 400 Bad Request
+    + 404 Not Found
+3. response.json()
+- Hàm response.json() trả về một Promise. Do đó, cần await lần nữa để chờ quá trình thực hiện lệnh response.json() hoàn tất
+4. try...catch
+- Lỗi mạng (Network Error): Người dùng bị mất mạng, đứt cáp, sai địa chỉ URL (Domain không tồn tại)
+- Lỗi do lập trình viên ném ra (throw new Error): Khi server trả về lỗi 404. Đoạn code `if (!response.ok)` đã chủ động ném (throw) lỗi ra cho tầng catch
+- Lỗi dữ liệu bị hỏng (JSON Parse Error): server trả về thành công (200 OK) nhưng dữ liệu bị hỏng hoặc trả về một trang lỗi HTML không phải JSON
+##### Nguồn tham chiếu: tuan_5_javascript_dom_async - 20_ajax_async
