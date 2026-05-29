@@ -72,3 +72,68 @@ async function getData() {
 - Lỗi do lập trình viên ném ra (throw new Error): Khi server trả về lỗi 404. Đoạn code `if (!response.ok)` đã chủ động ném (throw) lỗi ra cho tầng catch
 - Lỗi dữ liệu bị hỏng (JSON Parse Error): server trả về thành công (200 OK) nhưng dữ liệu bị hỏng hoặc trả về một trang lỗi HTML không phải JSON
 ##### Nguồn tham chiếu: tuan_5_javascript_dom_async - 20_ajax_async
+
+## Câu A3 — Promise States
+### Vẽ sơ đồ 3 trạng thái của Promise (Pending → Fulfilled, Pending → Rejected) liên tưởng đến ví dụ đặt đồ ăn:
+    Đặt hàng                                    Nhận đồ ăn
+        │                                            │
+        ▼                                            ▼
+    ┌─────────────────────────────────────────────────────┐
+    │                                                     │
+    │   ⏳ PENDING        →    ✅ FULFILLED    hoặc    ❌ REJECTED
+    │   (Đang xử lý)          (Thành công)            (Thất bại)
+    │                                                     │
+    │   Nhà hàng đang         Đồ ăn giao thành       Nhà hàng hủy đơn
+    │   nấu đồ ăn             công → ăn ngon!         → hoàn tiền
+    │                                                     │
+    └─────────────────────────────────────────────────────┘
+### Giải thích:
+- Callback Hell là hiện tượng xảy ra khi có quá nhiều tác vụ bất đồng bộ (Asynchronous) phải chạy tuần tự phụ thuộc vào nhau -> Các hàm callback lồng vào nhau liên tiếp
+- Viết ví dụ 4 cấp callback hell → Refactor thành async/await:
+```javascript
+// Callback Hell
+function getUserOrder() {
+    // Cấp 1
+    request("/api/user", function (err1, user) {
+        if (err1) {
+            console.error(err1);
+            return;
+        }
+        // Cấp 2
+        request(`/api/orders/${user.id}`, function (err2, orders) {
+            if (err2) {
+                console.error(err2);
+                return;
+            }
+            // Cấp 3
+            request(`/api/products/${orders[0].productId}`, function (err3, product) {
+                if (err3) {
+                    console.error(err3);
+                    return;
+                }
+                // Cấp 4
+                console.log(product);
+            }); // Đóng Cấp 3
+        }); // Đóng Cấp 2
+    }); // Đóng Cấp 1
+}
+
+// Async/Await
+async function getUserOrder() {
+    try {
+        const userRes = await fetch("/api/user");
+        const user = await userRes.json();
+
+        const ordersRes = await fetch(`/api/orders/${user.id}`);
+        const orders = await ordersRes.json();
+
+        const productRes = await fetch(`/api/products/${orders[0].productId}`);
+        const product = await productRes.json();
+
+        console.log(product);
+    } catch (err) {
+        console.error(err);
+    }
+}
+```
+##### Nguồn tham chiếu: tuan_5_javascript_dom_async - 20_ajax_async - 3. ⚙️ Core Technical Truth - (Promise — "Lời hứa" trong JavaScript và Async/Await — "Promise nhưng đọc như code thường")
