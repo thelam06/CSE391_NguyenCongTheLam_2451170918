@@ -217,3 +217,34 @@ countDisplay.textContent = count;
 // Dòng 28
 historyList.textContent = null;
 ```
+
+## Câu C2 - Performance
+1. Bind event lên 1000 elements riêng lẻ là BAD PRACTICE vì:
+- Tốn nhiều RAM: Mỗi hàm addEventListener thực chất là một Object trong bộ nhớ JavaScript. Trình duyệt phải cấp phát 1000 ô nhớ riêng biệt để lưu trữ 1000 Object này. Nếu số lượng phần tử tăng dần tới vô hạn, ứng dụng sẽ bị ngốn RAM, gây ra hiện tượng giật lag, đặc biệt là trên điện thoại cấu hình yếu
+- Gây rò rỉ bộ nhớ (Memory Leak): Khi xóa một thẻ HTML khỏi màn hình bằng JavaScript, nếu không gỡ bỏ sự kiện trên thẻ đó, trình duyệt sẽ không thể giải phóng ô nhớ của thẻ đó vì hàm addEventListener vẫn đang gắn với thẻ HTML đó
+### Event Delegation giải quyết thế nào?
+- Nhờ vào cơ chế Event Bubbling, khi bất kỳ thẻ HTML nào bị click, quả bóng sự kiện sẽ tự động bay ngược lên trên, đi qua các tầng cha và chạm vào thẻ cha hoặc thẻ container bao bọc ngoài cùng
+- Chỉ cần 1 hàm duy nhất gắn tại thẻ cha. Bộ nhớ RAM được tiết kiệm tới 99.9%. Thẻ con có thêm mới hay xóa đi thì thẻ cha vẫn đứng đó hứng sự kiện, loại bỏ hoàn toàn nguy cơ rò rỉ bộ nhớ
+2. Cho code
+```javascript
+for (let i = 0; i < 1000; i++) {
+    const div = document.createElement("div");
+    div.textContent = `Item ${i}`;
+    document.body.appendChild(div);   // ← 1000 lần reflow!
+}
+```
+### Refactor dùng DocumentFragment để chỉ gây 1 lần reflow:
+```javascript
+const fragment = document.createDocumentFragment();
+
+for (let i = 0; i < 1000; i++) {
+    const div = document.createElement("div");
+    div.textContent = `Item ${i}`;
+    fragment.appendChild(div);
+}
+
+document.body.appendChild(fragment);
+```
+### Giải thích: dùng DocumentFragment nhanh hơn vì:
+- Code cũ: 1000 lần chỉnh sửa DOM thật = 1000 lần trình duyệt phải Reflow
+- Code mới: 1000 lần chỉnh sửa trên DocumentFragment (trong bộ nhớ RAM, 0 lần Reflow) + 1 lần đổ vào DOM thật
