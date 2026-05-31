@@ -137,3 +137,120 @@ async function getUserOrder() {
 }
 ```
 ##### Nguồn tham chiếu: tuan_5_javascript_dom_async - 20_ajax_async - 3. ⚙️ Core Technical Truth - (Promise — "Lời hứa" trong JavaScript và Async/Await — "Promise nhưng đọc như code thường")
+
+# PHẦN C — PHÂN TÍCH
+## Câu C1 — Error Handling Strategy
+### Bạn xây dựng app E-Commerce gọi nhiều APIs. Thiết kế chiến lược xử lý lỗi:
+**1. Network errors (mất mạng giữa chừng):**
+#### Chiến lược:
+- Kiểm tra trạng thái mạng trước khi cho phép mua sắm/thanh toán
+- Nếu mất kết nối mạng, thay vì để app sập ngầm, chủ động hiện thông báo Toast nhắc nhở khách hàng
+- Khi có mạng trở lại, hệ thống tự động tải lại giỏ hàng cho khách
+```javascript
+// Hàm kiểm tra trạng thái mạng trước khi cho phép mua sắm/thanh toán
+function checkNetworkBeforeAction() {
+    if (!navigator.onLine) {
+        // Chủ động hiện thông báo Toast nhắc nhở khách hàng
+        alert("🔌 Mất kết nối Internet! Vui lòng kiểm tra lại kết nối để tiếp tục mua sắm.");
+        return false;
+    }
+    return true;
+}
+
+// Lắng nghe sự kiện hệ thống để cập nhật giao diện
+window.addEventListener("offline", () => {
+    // Hiển thị một banner "Đang ngoại tuyến"
+    console.log("Người dùng đang ngoại tuyến!");
+});
+
+window.addEventListener("online", () => {
+    // Ẩn banner ngoại tuyến, tự động tải lại giỏ hàng cho khách
+    console.log("Đã có mạng trở lại!");
+});
+```
+**2. API errors (server trả 500, 404, 429 Too Many Requests):**
+#### Chiến lược:
+- Sử dụng điều kiện if `(!response.ok)` và đọc chỉ số `response.status` để phân loại lỗi (500, 404, 429 Too Many Requests) và đưa ra trải nghiệm người dùng (UX) phù hợp:
+```javascript
+async function handleEcomApiResponse(response) {
+    if (response.ok) {
+        return await response.json();
+    }
+
+    // Nếu response.ok bằng false, bắt đầu phân tích mã lỗi response.status:
+    switch (response.status) {
+        case 404:
+            throw new Error("Sản phẩm không tồn tại hoặc đã bị gỡ bỏ!");
+        case 429:
+            throw new Error("Bạn đang thao tác quá nhanh. Vui lòng thử lại sau vài giây!");
+        case 500:
+            throw new Error("Máy chủ đang quá tải. Vui lòng thử lại sau ít phút!");
+        default:
+            throw new Error(`Lỗi hệ thống không xác định: ${response.status}`);
+    }
+}
+```
+**3. Timeout (API chậm > 10 giây):**
+#### Chiến lược:
+- Viết một hàm cho phép tự huỷ lệnh fetch nếu quá một khoảng thời gian nào đó
+```javascript
+async function fetchWithTimeout(url, options = {}, ms = 10000) {
+    // Khởi tạo bộ điều khiển tự hủy
+    const controller = new AbortController();
+    // Đưa chiếc chìa khóa hủy (signal) vào trong cấu hình của lệnh fetch
+    options.signal = controller.signal;
+    // Kích hoạt đồng hồ bấm giờ
+    const timeoutId = setTimeout(() => {
+        // Huỷ fetch ngay lập tức khi hết giờ!
+        controller.abort();
+    }, ms);
+
+    try {
+        const response = await fetch(url, options);
+        return response;
+    }
+    catch (error) {
+        // Nếu lỗi do huỷ lệnh fetch, thông báo cho người dùng
+        if (error.name === "AbortError") {
+            throw new Error("Hệ thống mất quá nhiều thời gian để phản hồi!");
+        }
+        throw error;
+    }
+    finally {
+        // Xóa đồng hồ bấm giờ nếu fetch thành công trước thời hạn
+        clearTimeout(timeoutId);
+    }
+}
+```
+**4. Retry logic (thử lại 3 lần nếu lỗi network):**
+#### Chiến lược:
+- Tự động gọi lại API đó thêm 3 lần nữa, mỗi lần cách nhau một khoảng ngắn.
+- Nếu đến lần thứ 3 vẫn thất bại thì mới báo lỗi lên màn hình
+```javascript
+// Hàm phụ hỗ trợ tạo độ trễ bằng Promise
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+async function fetchWithRetry(url, options = {}, maxRetries = 3) {
+    // Chạy vòng lặp từ lần thử 1 đến maxRetries
+    for (let i = 1; i <= maxRetries; i++) {
+        try {
+            console.log(`Đang thử kết nối lần thứ ${i}...`);
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                // Nếu server trả lỗi 404, 500 -> Không retry nữa, ném lỗi ra ngoài
+                throw new Error(`Lỗi: ${response.status}`);
+            }
+            // Nếu kết nối thành công thì trả dữ liệu về và thoát hàm
+            return await response.json();
+        } catch (error) {
+            // Nếu đây là lần thử cuối cùng rồi mà vẫn lỗi -> Chính thức ném lỗi ra ngoài
+            if (i === maxRetries) {
+                throw new Error(`Đã thử lại ${maxRetries} lần nhưng vẫn thất bại! Lỗi: ${error.message}`);
+            }
+            // Nếu chưa hết số lần thử, bắt hệ thống "đóng băng" trước khi sang vòng lặp kế tiếp
+            console.warn(`Lần ${i} thất bại do lỗi mạng. Đang đợi để thử lại...`);
+            await delay(1500); 
+        }
+    }
+}
+```
