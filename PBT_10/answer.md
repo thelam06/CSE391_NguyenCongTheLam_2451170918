@@ -199,7 +199,7 @@ async function fetchWithTimeout(url, options = {}, ms = 10000) {
     const controller = new AbortController();
     // Đưa chiếc chìa khóa hủy (signal) vào trong cấu hình của lệnh fetch
     options.signal = controller.signal;
-    // Kích hoạt đồng hồ bấm giờ
+    // Khởi tạo đồng hồ bấm giờ
     const timeoutId = setTimeout(() => {
         // Huỷ fetch ngay lập tức khi hết giờ!
         controller.abort();
@@ -251,6 +251,125 @@ async function fetchWithRetry(url, options = {}, maxRetries = 3) {
             console.warn(`Lần ${i} thất bại do lỗi mạng. Đang đợi để thử lại...`);
             await delay(1500); 
         }
+    }
+}
+```
+
+## Câu C2 — Promise.all vs Promise.allSettled vs Promise.race
+### Giải thích sự khác nhau:
+| Method | Khi nào resolve? | Khi nào reject? | Use case |
+|--------|------------------|-----------------|----------|
+| `.all()` | Khi tất cả các Promise đều thành công | Chỉ cần 1 Promise thất bại (Reject) là sập toàn bộ ngay lập tức | Khi các API có mối quan hệ ràng buộc với nhau |
+| `.allSettled()` | Khi tất cả các Promise đều đã chạy xong (Bất kể thành công hay thất bại) | Không bao giờ bị Reject | Khi các API độc lập hoàn toàn |
+| `.race()` | Khi có 1 Promise đầu tiên chạy xong (Bất kể thành công hay thất bại) | Khi có 1 Promise đầu tiên bị thất bại trước khi có Promise thành công | Làm tính năng Timeout cho API hoặc đo tốc độ phản hồi đường truyền |
+| `.any()` | Khi có Promise đầu tiên thành công | Khi tất cả các Promise đều bị thất bại | Gọi các Server dự phòng |
+### Viết ví dụ code cho mỗi method với scenario thực tế (không phải ví dụ delay đơn giản):
+- Chọn scenario trong một trang E-commerce:
+1. `Promise.all()`
+```javascript
+async function renderCheckoutPage(userId) {
+    try {
+        // Gọi đồng thời 3 API để tiết kiệm thời gian
+        const [cart, wallet, shipping] = await Promise.all([
+            fetch(`/api/cart/${userId}`).then(res => res.json()),
+            fetch(`/api/wallet/${userId}`).then(res => res.json()),
+            fetch(`/api/shipping-fee?user=${userId}`).then(res => res.json())
+        ]);
+        // Nếu cả 3 API đều được gọi thành công thì mới hiện trang thanh toán hoá đơn
+        console.log("Đang hiện trang thanh toán:", { cart, wallet, shipping });
+        // Giao diện (UI) hóa đơn ở đây...
+    }
+    catch (error) {
+        // Chỉ cần 1 trong 3 API trên bị sập, nhảy vào hàm catch và trả về lỗi
+        console.error("Lỗi khi hiển thị hiện trang thanh toán", error.message);
+        alert("Hệ thống tính toán hóa đơn gặp sự cố. Vui lòng bấm F5 để thử lại!");
+    }
+}
+```
+2. `Promise.allSettled()`
+```javascript
+async function loadUserDashboard(userId) {
+    // Gọi đồng thời 3 API cùng lúc
+    const results = await Promise.allSettled([
+        fetch(`/api/profile/${userId}`).then(res => res.json()),
+        fetch(`/api/orders/${userId}`).then(res => res.json()),
+        fetch(`/api/wishlist/${userId}`).then(res => res.json())
+    ]);
+
+    // results trả về một mảng gồm 3 Object
+    const [profileRes, ordersRes, wishlistRes] = results;
+
+    //Xử lý từng khối, nếu trong 3 khối có khối bị lỗi thì không làm ảnh hưởng đến các khối còn lại
+    // Khối 1: Xử lý hiển thị Profile
+    if (profileRes.status === "fulfilled") {
+        document.querySelector("#profile").textContent = `Chào, ${profileRes.value.name}`;
+    } 
+    else {
+        document.querySelector("#profile").textContent = "Không thể tải thông tin cá nhân";
+    }
+
+    // Khối 2: Xử lý hiển thị Đơn hàng
+    if (ordersRes.status === "fulfilled") {
+        renderOrderTable(ordersRes.value);
+    } 
+    else {
+        document.querySelector("#orders-box").textContent = "Lỗi tải lịch sử đơn hàng";
+    }
+
+    // Khối 3: Xử lý hiển thị Wishlist
+    if (wishlistRes.status === "fulfilled") {
+        renderWishlist(wishlistRes.value);
+    } 
+    else {
+        document.querySelector("#wishlist-box").textContent = "Không thể tải danh sách yêu thích lúc này";
+    }
+}
+```
+3. `Promise.race()`
+```javascript
+async function quickCheckout(orderData) {
+    // khởi tạo đồng hồ bấm giờ tự động Reject sau 5 giây
+    const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error("Hệ thống nghẽn mạng")), 5000)
+    );
+
+    // API đặt đơn hàng thật lên server
+    const apiPromise = fetch("/api/quick-buy", {
+        method: "POST",
+        body: JSON.stringify(orderData)
+    }).then(res => res.json());
+
+    try {
+        // Cho API đua tốc độ với đồng hồ bấm giờ 5 giây
+        // Nếu API về đích trước, Promise.race sẽ lấy kết quả của API
+        const winner = await Promise.race([apiPromise, timeoutPromise]);
+        
+        alert("Đặt hàng thành công! Mã đơn: " + winner.orderId);
+    } 
+    catch (error) {
+        // Nếu đồng hồ bấm giờ về đích trước, báo lỗi và trả về kết quả
+        alert("Thất bại: " + error.message);
+    }
+}
+```
+4. `Promise.any()`
+```javascript
+async function downloadPriceList() {
+    try {
+        // Gọi lệnh fetch tải 3 nguồn dự phòng cùng lúc
+        const fastestData = await Promise.any([
+            fetch("https://vn-server.com/prices.json").then(res => res.json()),
+            fetch("https://sg-server.com/prices.json").then(res => res.json()),
+            fetch("https://us-server.com/prices.json").then(res => res.json())
+        ]);
+
+        console.log("Đã lấy được bảng giá từ server nhanh nhất:", fastestData);
+        renderPrices(fastestData);
+    }
+    // Nếu cả 3 server đều sập mới nhảy vào hàm catch
+    catch (aggregateError) {
+        console.error("Tất cả server dự phòng đều sập!", aggregateError.errors);
+        alert("Không thể tải bảng giá sản phẩm. Vui lòng liên hệ tổng đài!");
     }
 }
 ```
