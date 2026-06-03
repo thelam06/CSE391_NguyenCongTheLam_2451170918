@@ -59,7 +59,6 @@ const tinhThueBaoHiem = luong => {
 - Tương tự Function Expression, do Arrow Function không có cơ chế hoisting -> Biến `ketQua` bị rơi vào TDZ (Temporal Dead Zone), không thể truy cập (lỗi ReferenceError) -> Phải khai báo hàm `tinhThueBaoHiem` trước khi dùng
 ##### Nguồn tham chiếu: tuan_4_javascript_basics - 05_functions - 3. ⚙️ Core Technical Truth - 3 cách khai báo function
 
-
 ## Câu A2 — Scope & Closure
 ### Không chạy code, dự đoán output:
 ```javascript
@@ -150,6 +149,8 @@ console.log(product.specs.ram);        // 16 (thay vì 8)
 - Hệ quả: Câu lệnh `copy.specs.ram = 16;` sẽ đi theo con đường của copy để sửa ô nhớ dùng chung đó -> nếu dùng console.log(product.specs.ram) -> kết quả thay đổi thành 16
 ##### Nguồn tham chiếu: tuan_4_javascript_basics - 08_destructuring_spread
 
+<br>
+
 # PHẦN C — SUY LUẬN
 ## Câu C1 — Refactor Code
 ```javascript
@@ -234,3 +235,8 @@ console.log(miniArray.map([1,2,3], x => x * 2));        // → [2,4,6]
 console.log(miniArray.filter([1,2,3,4], x => x > 2));    // → [3,4]
 console.log(miniArray.reduce([1,2,3,4], (a,b) => a+b, 0)); // → 10
 ```
+
+<br>
+
+# PHẦN D — VIDEO THỰC HÀNH OBS
+- Link video: [PBT08_NguyenCongTheLam_2451170918](https://drive.google.com/file/d/1E7JT-RvsNybKX5OOGQ7NJHHD4v2gn7B2/view?usp=sharing)

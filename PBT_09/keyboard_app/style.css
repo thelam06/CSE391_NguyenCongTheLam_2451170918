@@ -30,7 +30,7 @@ body {
     outline-offset: 2px;
 }
 
-/* Khung chứa Gallery */
+/* --- Khung chứa Gallery --- */
 .gallery-container {
     max-width: 800px;
     margin: 0 auto;
