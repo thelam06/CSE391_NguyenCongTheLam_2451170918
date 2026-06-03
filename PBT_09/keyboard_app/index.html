@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard navigation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Ô chưa các hướng dẫn điều hướng Keyboard -->
+    <div class="instructions">
+        <h3 class="title">Hướng dẫn phím tắt</h3>
+        <ul>
+            <li><strong>Ctrl + K</strong>: Mở Command Palette</li>
+            <li><strong>Tab</strong>: Di chuyển qua lại giữa các nút bấm</li>
+            <li><strong>Số 1 - 9</strong>: Nhảy nhanh đến ảnh tương ứng</li>
+            <li>Khi xem ảnh: <strong>Mũi tên ← → </strong>(Đổi ảnh),<strong> Space </strong>(Bật/Tắt Slideshow),<strong>
+                    Esc</strong> (Đóng)</li>
+        </ul>
+    </div>
+
+    <!-- Container chứa ảnh -->
+    <div class="gallery-container">
+        <h1>Photo Gallery</h1>
+        <p>Mẹo: Nhấn số 1-9 trên bàn phím để mở nhanh ảnh!</p>
+        <div class="grid" id="gallery-grid">
+            <button class="btn-thumbnail" data-index="0" aria-label="Xem ảnh 1">
+                <img src="https://picsum.photos/id/10/400/250" alt="Ảnh 1">
+            </button>
+            <button class="btn-thumbnail" data-index="1" aria-label="Xem ảnh 2">
+                <img src="https://picsum.photos/id/15/400/250" alt="Ảnh 2">
+            </button>
+            <button class="btn-thumbnail" data-index="2" aria-label="Xem ảnh 3">
+                <img src="https://picsum.photos/id/19/400/250" alt="Ảnh 3">
+            </button>
+            <button class="btn-thumbnail" data-index="3" aria-label="Xem ảnh 4">
+                <img src="https://picsum.photos/id/24/400/250" alt="Ảnh 4">
+            </button>
+            <button class="btn-thumbnail" data-index="4" aria-label="Xem ảnh 5">
+                <img src="https://picsum.photos/id/30/400/250" alt="Ảnh 5">
+            </button>
+            <button class="btn-thumbnail" data-index="5" aria-label="Xem ảnh 6">
+                <img src="https://picsum.photos/id/48/400/250" alt="Ảnh 6">
+            </button>
+            <button class="btn-thumbnail" data-index="6" aria-label="Xem ảnh 7">
+                <img src="https://picsum.photos/id/50/400/250" alt="Ảnh 7">
+            </button>
+            <button class="btn-thumbnail" data-index="7" aria-label="Xem ảnh 8">
+                <img src="https://picsum.photos/id/55/400/250" alt="Ảnh 8">
+            </button>
+            <button class="btn-thumbnail" data-index="8" aria-label="Xem ảnh 9">
+                <img src="https://picsum.photos/id/60/400/250" alt="Ảnh 9">
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal hiển thị ảnh lớn -->
+    <div class="modal" id="photo-modal" role="dialog" aria-modal="true" aria-label="Trình xem ảnh lớn">
+        <div class="modal-content">
+            <img src="" alt="Ảnh phóng to" class="modal-img" id="modal-img">
+            <p id="slide-show-status" style="font-weight: bold; color: var(--primary-color); height: 20px;"></p>
+            <p>Dùng ← → để chuyển ảnh | Space: Auto Play | Esc: Đóng</p>
+            <button id="btn-close-modal" class="btn-close-modal" aria-label="Đóng cửa sổ xem ảnh">Đóng (Esc)</button>
+        </div>
+    </div>
+
+    <!-- Menu hiện danh sách command -->
+    <div class="palette-overlay" id="command-palette" role="dialog" aria-modal="true" aria-label="Hộp tìm kiếm lệnh">
+        <div class="palette-box">
+            <input type="text" class="palette-input" id="palette-input"
+                placeholder="Gõ từ khóa tìm kiếm lệnh..." aria-label="Nhập lệnh tại đây">
+            <ul class="command-list" id="command-list" role="listbox" aria-label="Danh sách lệnh tìm thấy">
+
+            </ul>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
